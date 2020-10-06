@@ -1,0 +1,67 @@
+body, html {
+	margin: 0;
+	font-family: "geo";
+}
+
+a {
+	color: #13bed7;
+}
+
+#loading {
+	color: white;
+	background-color: black;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+}
+
+#loading p {
+	color: #d71343;
+}
+
+#loading h1 {
+	letter-spacing: .5em;
+}
+
+#content {
+	transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	text-align: center;
+}
+
+.dot {
+	animation-name: grow;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	font-size: 1em;
+	color: white;
+}
+
+/*#dot-1 {
+	animation-delay: 0;
+}
+
+#dot-2 {
+	animation-delay: 1s;
+}
+
+#dot-3 {
+	animation-delay: 2s;
+}*/
+
+@keyframes grow {
+	0% {
+		font-size: 1em;
+		color: white;
+	}
+	50% {
+		font-size: 2em;
+		color: #d71343;
+	}
+	100% {
+		font-size: 1em;
+		color: white;
+	}
+}
