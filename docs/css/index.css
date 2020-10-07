@@ -2,6 +2,7 @@
 body, html {
 	height: 100vh;
 	background-color: #000000;
+	color: white;
 }
 
 .parallax {
@@ -146,4 +147,9 @@ body, html {
 	right: 128px;
 	bottom: 128px;
 	width: 4em;
+}
+
+#site-src {
+	bottom: 0;
+	padding: 48px;
 }

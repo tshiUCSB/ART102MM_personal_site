@@ -16,11 +16,7 @@ body, html {
 	font-family: "geo";
 }
 
-span.highlight {
-	color: var(--highlight-color);
-}
-
-a.highlight {
+.highlight {
 	color: var(--highlight-color);
 }
 
@@ -34,6 +30,10 @@ a.highlight {
 
 .pos-abs {
 	position: absolute;
+}
+
+.pos-rel {
+	position: relative;
 }
 
 .display-grid {
