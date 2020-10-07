@@ -1,3 +1,9 @@
+:root {
+	--highlight-color: #d71343;
+	--accent-color2: #13bed7;
+	--midtone-color: #2d2d2d;
+}
+
 body, html {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -5,5 +11,11 @@ body, html {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	overflow: hidden;
+	scroll-behavior: smooth;
+	margin: 0;
+	font-family: "geo";
+}
+
+span.highlight {
+	color: var(--highlight-color);
 }
