@@ -81,7 +81,7 @@ body, html {
 }
 
 .hover-expand:hover {
-	transform: scale(1.1, 1.1);
+	transform: scale(1.02, 1.02);
 }
 
 .hover-full-opacity:hover {
@@ -89,7 +89,7 @@ body, html {
 }
 
 .active-shrink:active {
-	transform: scale(.9, .9);
+	transform: scale(.98, .98);
 }
 
 @keyframes shrink-disappear {

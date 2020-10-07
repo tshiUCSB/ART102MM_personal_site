@@ -170,7 +170,14 @@ body, html {
 	text-align: center;
 	font-size: 1.5em;
 	letter-spacing: .2em;
-	padding: 64px 24px;
+	top: 0;
+	background-color: rgba(0, 0, 0, .3);
+	width: 100%;
+	height: 100%;
+}
+
+.showcase-card-info h2 {
+	margin: 128px;
 }
 
 .showcase-card:hover {
@@ -179,6 +186,7 @@ body, html {
 
 .showcase-card-info:hover {
 	color: var(--highlight-color);
+	opacity: 0;
 }
 
 .showcase-card-thumbnail {
