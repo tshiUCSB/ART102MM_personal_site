@@ -19,3 +19,111 @@ body, html {
 span.highlight {
 	color: var(--highlight-color);
 }
+
+a.highlight {
+	color: var(--highlight-color);
+}
+
+.float-right {
+	float: right;
+}
+
+.pos-fix {
+	position: fixed;
+}
+
+.pos-abs {
+	position: absolute;
+}
+
+.display-grid {
+	display: grid;
+}
+
+.nav-icon {
+	width: 48px;
+	height: 48px;
+	z-index: 200;
+	right: 48px;
+	top: 48px;
+}
+
+.nav-icon-bar {
+	background-color: white;
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	height: 10%;
+}
+
+.nav-icon-anim {
+	animation-duration: 2s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+.nav-icon-bar-top {
+	--offset: calc(-50% - 14px);
+	transform: translateY(var(--offset));
+	animation-name: cross-left;
+}
+
+.nav-icon-bar-mid {
+	transform: translateY(-50%);
+	animation-name: shrink-disappear;
+	animation-duration: .6s;
+}
+
+.nav-icon-bar-bottom {
+	--offset: calc(-50% + 14px);
+	transform: translateY(var(--offset));
+	animation-name: cross-right;
+}
+
+.hover-expand:hover {
+	transform: scale(1.1, 1.1);
+}
+
+.hover-full-opacity:hover {
+	opacity: 1;
+}
+
+.active-shrink:active {
+	transform: scale(.9, .9);
+}
+
+@keyframes shrink-disappear {
+	from {
+		width: 100%;
+		margin-left: 0;
+	}
+	to {
+		width: 0;
+		margin-left: 50%;
+	}
+}
+
+@keyframes cross-left {
+	0% {
+		transform: translateY(calc(-50% - 14px));
+	}
+	50% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: rotate(45deg);
+	}
+}
+
+@keyframes cross-right {
+	0% {
+		transform: translateY(calc(-50% + 14px));
+	}
+	50% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: rotate(-45deg);
+	}
+}
+
