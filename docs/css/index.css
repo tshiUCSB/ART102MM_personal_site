@@ -153,3 +153,34 @@ body, html {
 	bottom: 0;
 	padding: 48px;
 }
+
+#studio {
+	grid-template-columns: repeat(4, 1fr); 
+}
+
+.showcase-card {
+	width: 100%;
+	background-color: var(--highlight-color);
+	margin: 48px 0 24px 0;
+}
+
+.showcase-card-info {
+	color: white;
+	text-decoration-line: none;
+	text-align: center;
+	font-size: 1.5em;
+	letter-spacing: .2em;
+	padding: 64px 24px;
+}
+
+.showcase-card:hover {
+	background-color: white;
+}
+
+.showcase-card-info:hover {
+	color: var(--highlight-color);
+}
+
+.showcase-card-thumbnail {
+	width: 100%;
+}
