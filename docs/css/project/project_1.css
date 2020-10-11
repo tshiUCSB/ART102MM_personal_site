@@ -1,0 +1,13 @@
+
+body, html {
+	background-color: black;
+}
+
+.half-screen {
+	width: 50vw;
+}
+
+.half-screen img {
+	width: 100%;
+}
+

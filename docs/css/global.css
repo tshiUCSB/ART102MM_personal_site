@@ -40,6 +40,11 @@ body, html {
 	display: grid;
 }
 
+.mass-text {
+	font-family: 'Rajdhani', sans-serif;
+	font-family: 'Abel', sans-serif;
+}
+
 .nav-icon {
 	width: 48px;
 	height: 48px;

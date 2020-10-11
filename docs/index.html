@@ -6,7 +6,7 @@
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width" />
 	<link rel="stylesheet" type="text/css" href="css/global.css" />
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
-	<link href="https://fonts.googleapis.com/css2?family=Geo&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Geo&family=Abel&family=Rajdhani&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -29,15 +29,15 @@
 	</div>
 
 	<div id="about-content">
-		<p class="content">
-			Dear whoever happens to be reading this right now, I'm glad to see you here. My name is Tina Shi and I am majoring in Computer Science and Art. As the majors suggest, I am passionate in <span class="highlight">designing, illustrating, and coding</span>, where creativity can flow and the limitless possibilities and potentials can be both exciting and frustrating. I am interested in interactive media, especially games, where <span class="highlight">art and technology come together to tell storeis, construct worlds, and create experiences</span>. Recently, I've been practicing pixel art for numerous game dev projects and also a website design. It's intricate in that there are only so many pixels you get work with to represent something, yet at the same time, because there are limited number of pixels, it also allows for vagueness and abstraction. Aside from pixel art, there's still a lot that I would like to learn and master.<br><br>
+		<p class="content mass-text">
+			Dear whoever happens to be reading this right now, I'm glad to see you here. My name is Tina Shi and I am majoring in Computer Science and Art. As the majors suggest, I am passionate in <span class="highlight">designing, illustrating, and coding</span>, where creativity can flow and the limitless possibilities and potentials can be both exciting and frustrating. I am interested in interactive media, especially games, where <span class="highlight">art and technology come together to tell storeis, construct worlds, and create experiences</span>. Recently, I've been practicing pixel art for numerous game dev projects and also a website design. It's intricate in that there are only so many pixels you get work with to represent something, yet at the same time, because there is a limited number of pixels, it also allows for vagueness and abstraction. Aside from pixel art, there's still a lot that I would like to learn and master.<br><br>
 			This site is where I'll showcase my work for <span class="highlight">ART102MM: Mobile Media</span>. I hope you enjoy your brief visit.
 		</p>
 	</div>
 
 	<div class="parallax portrait" id="quote">
 		<div id="quote-content">
-			<p class="content" id="insp-quote">
+			<p class="content mass-text" id="insp-quote">
 				<span class="quotation-mark">"</span><br>Great <span class="highlight">artists</span> and great men of science do work which is in itself delightful; while they are doing it, it secures them the <span class="highlight">respect</span> of those whose respect is worth having, which gives them <span class="highlight">the most fundamental kind of power</span>, namely, powers <span class="highlight">over</span> men's <span class="highlight">thoughts and feelings</span>.<br><span class="quotation-mark float-right">"</span><br>
 				<span id="citation" class="float-right">
 					<span class="author">Bertrand Russell</span><br>
@@ -64,35 +64,21 @@
 		<div id="gest-ex">
 			<img src="assets/gesture_ex_1.png" id="gest-ex-1" class="pos-abs gest-ex" />
 			<img src="assets/gesture_ex_2.png" id="gest-ex-2" class="pos-abs gest-ex" />
-			<p id="app-rec-description" class="content pos-abs">
+			<p id="app-rec-description" class="content pos-abs mass-text">
 				<a href="https://line-of-action.com/" class="highlight">Line of Action</a> is an online library for gesture and figure drawing references. It's easy to tailor what you want to draw and how long you'd like to draw for each session with its filter for images and different options for duration. It has some pretty good references in store and has a pretty clean website design.
 			</p>
 			<a href="https://line-of-action.com/"><img src="assets/arrow_icon.png" id="loa-arrow-icon" class="arrow-icon pos-abs hover-expand hover-full-opacity active-shrink" /></a>
 		</div>
 	</div>
 
-	<div class="display-grid showcase" id="studio">
-		<div class="content grid-item" id="studio-title">
-			<h1>Studio</h1>
-			<p class="highlight">Work from in-class studio time</p>
-		</div>
-		<div class="showcase-column grid-item" id="studio-col-1">
-			<div class="showcase-card hover-expand active-shrink pos-rel">
-				<a href="html/studio_1.html">
-					<img src="assets/thumbnails/studios/studio_1.png" class="showcase-card-thumbnail" />
-					<div class="showcase-card-info pos-abs"><h2 class="abs-pos">Studio 1</h2></div>
-				</a>
-			</div>
-		</div>
-		<div class="showcase-column grid-item" id="studio-col-2"></div>
-		<div class="showcase-column grid-item" id="studio-col-3"></div>
-	</div>
-
+	<div id="studio"></div>
+	<div id="project"></div>
 	
-
 	<div class="parallax grove-of-light pos-rel">
-		<p class="pos-abs content" id="site-src">This site is hosted from <a href="https://github.com/tshiUCSB/ART102MM_personal_site" class="highlight">GitHub Repo</a></p>
+		<p class="pos-abs content" id="site-src">This site is hosted from <a href="https://github.com/tshiUCSB/ART102MM_personal_site" class="highlight">this GitHub Repo</a></p>
 	</div>
+
+	<script src="js/index.js"></script>
 
 </body>
 
