@@ -5,6 +5,7 @@ Code by Tina Shi
 URL: https://tshiucsb.github.io/ART102MM_personal_site/html/project/project_1.html
 */
 
+var cnv = null;
 var colors = null;
 var pre_shapes = null;
 var post_shapes = null;
@@ -18,6 +19,8 @@ function Shape(type, x, y, w, h, fill_color, strk_color=null, strk_weight=null, 
 	this.strk_color = strk_color;
 	this.strk_weight = Math.floor(strk_weight);
 	this.blend = blend;
+	this.vx = 0;
+	this.vy = 0
 }
 
 function init_shapes() {
@@ -105,9 +108,6 @@ function init_shapes() {
 
 		s_w_circle_w: new Shape("circle", width * .13, height * .91, 
 			width * .03, null, colors.w),
-		
-		w_square_bg: new Shape("square", width * .47, height * .95 / 2, 
-			width * .3, null, colors.bg)
 	};
 
 	post_shapes = {
@@ -179,10 +179,6 @@ function draw_background() {
 	fill(colors.bg_quad);
 	quad(Math.floor(width / 3), 0, width, Math.floor(height / 3), 
 		Math.floor(width / 3 * 2), height, 0, Math.floor(height * .55));
-	
-	// let slope_1 = height * .45 / (width / 3 * 2);
-	// let slope_2 = -height / 3 * 2 / (width / 3);
-	// triangle(width * .2, width * .2 * slope_1 + height * .55, );
 
 	fill(colors.bg_dark);
 	beginShape();
@@ -201,6 +197,77 @@ function draw_background() {
 		{x: Math.floor(width * .55), y: Math.floor(height * .2)}, {x: Math.floor(width / 3), y: 0}];
 	bezierVertex(v[0].x, v[0].y, v[1].x, v[1].y, v[2].x, v[2].y);
 	endShape();
+}
+
+function check_hitbox(x, y, shape) {
+	if (shape.type == "circle") {
+		let r = shape.w / 2;
+		if (dist(x, y, shape.x, shape.y) < r) {
+			return true;
+		}
+	}
+	else if (shape.type == "square") {
+		let r = shape.w / 2;
+		if (x > shape.x - r && x < shape.x + r && y > shape.y - r && y < shape.y + r) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function handle_mouse_overlap(shape) {
+	let max_v = width * .02;
+	let dir_x = mouseX - pmouseX;
+	let dir_y = mouseY - pmouseY;
+	let dist_x = mouseX - shape.x;
+	let dist_y = mouseY - shape.y;
+	let max_dist = 0;
+	if (shape.type == "circle") {
+		max_dist = shape.w / 2;
+	}
+	else if (shape.type == "square") {
+		max_dist = shape.w * Math.sqrt(2);
+	}
+	shape.vx = -dist_x / max_dist * max_v;
+	shape.vy = -dist_y / max_dist * max_v;
+}
+
+function update_motion(shape, acc) {
+	if (shape.vx != 0) {
+		if (shape.vx > 0) {
+			if (shape.vx - acc < 0) {
+				shape.vx = 0;
+			}
+			else {
+				shape.vx -= acc;
+			}
+		}
+		else {
+			if (shape.vx + acc > 0) {
+				shape.vx = 0;
+			}
+			shape.vx += acc;
+		}
+	}
+	if (shape.vy != 0) {
+		if (shape.vy > 0) {
+			if (shape.vy - acc < 0) {
+				shape.vy = 0;
+			}
+			else {
+				shape.vy -= acc;
+			}
+		}
+		else {
+			if (shape.vy + acc > 0) {
+				shape.vy = 0;
+			}
+			shape.vy += acc;
+		}
+	}
+
+	shape.x += shape.vx;
+	shape.y += shape.vy;
 }
 
 function draw_shapes(shapes) {
@@ -248,6 +315,12 @@ function draw_shapes(shapes) {
 			square(s.x, s.y, s.w);
 		}
 		blendMode(BLEND);
+
+		if (check_hitbox(mouseX, mouseY, s)) {
+			handle_mouse_overlap(s);
+		}
+		update_motion(s, .75);
+		
 	}
 }
 
@@ -266,7 +339,7 @@ function setup() {
 		pale_pink: color(180, 120, 120, 150),
 		w: color(230, 230, 240)
 	};
-	let cnv = createCanvas(window.innerWidth / 2, 
+	cnv = createCanvas(window.innerWidth / 2, 
 		window.innerWidth / 2 / 475 * 600);
 	cnv.position(window.innerWidth / 2, 0, "fixed");
 	init_shapes();
@@ -275,7 +348,16 @@ function setup() {
 function draw() {
 	draw_background();
 	draw_shapes(pre_shapes);
+	var bg_sqr = {w_square_bg: new Shape("square", width * .47, height * .95 / 2, 
+			width * .3, null, colors.bg)};
+	draw_shapes(bg_sqr);
 	draw_shapes(post_shapes);
+}
+
+function windowResized() {
+	cnv.width = window.innerWidth / 2;
+	cnv.height = window.innerWidth / 2 / 475 * 600;
+	cnv.position(window.innerWidth / 2, 0, "fixed");
 }
 
 
