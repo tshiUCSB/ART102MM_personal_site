@@ -5,10 +5,12 @@ Code by Tina Shi
 URL: https://tshiucsb.github.io/ART102MM_personal_site/html/project/project_1.html
 */
 
+//global variables for storing data later
 var cnv = null;
 var colors = null;
 var pre_shapes = null;
 var post_shapes = null;
+// Shape object to store info abt shapes for easy bulk drawing with draw_shapes()
 function Shape(type, x, y, w, h, fill_color, strk_color=null, strk_weight=null, blend=null) {
 	this.type = type;
 	this.x = Math.floor(x);
@@ -23,7 +25,12 @@ function Shape(type, x, y, w, h, fill_color, strk_color=null, strk_weight=null, 
 	this.vy = 0
 }
 
+// initialize the data of all the shapes that will be drawn onto canvas
 function init_shapes() {
+	// object containing all the shapes that will be drawn before drawing
+	// the background-colored square in the middle
+	// notated by the shape's location relative to center, shape type, color, and specification
+	// e.g. n_w_circle_blk_m is a medium black circle positioned north-west of center
 	pre_shapes = {
 		n_w_circle_br_outln: new Shape("circle", width * .1, height * .1,
 			width * .12, null, colors.br, color(100, 80, 100), width * .03),
@@ -109,7 +116,8 @@ function init_shapes() {
 		s_w_circle_w: new Shape("circle", width * .13, height * .91, 
 			width * .03, null, colors.w),
 	};
-
+	// object containing all the shapes that will be drawn after drawing the
+	// background-colored square in the middle
 	post_shapes = {
 		n_w_circle_g: new Shape("circle", width * .4, height * .37, 
 			width * .05, null, color(80, 100, 80)),
@@ -173,22 +181,28 @@ function init_shapes() {
 	}
 }
 
+// fills the background and draws the golden quadrilateral with curved sides in the background
 function draw_background() {
+	// fills background
 	background(colors.bg);
+	// draws golden quadrilateral
 	noStroke();
 	fill(colors.bg_quad);
 	quad(Math.floor(width / 3), 0, width, Math.floor(height / 3), 
 		Math.floor(width / 3 * 2), height, 0, Math.floor(height * .55));
 
+	// fills in top left w/ custom shape to shape the side of the quadrilateral into a curve
 	fill(colors.bg_dark);
 	beginShape();
 	vertex(0, 0);
 	vertex(Math.floor(width / 3), 0);
+	// temporary variable for computing coordinates of vertices for easy input
 	let v = [{x: Math.floor(width * .2), y: Math.floor(height * .2)}, 
 		{x: Math.floor(width * .25), y: width * .4}, {x: 0, y: Math.floor(height * .55)}];
 	bezierVertex(v[0].x, v[0].y, v[1].x, v[1].y, v[2].x, v[2].y);
 	endShape();
 
+	// fills in top right w/ custom shape to shape other side of quadrilateral
 	beginShape();
 	vertex(Math.floor(width / 3), 0);
 	vertex(width, 0);
@@ -199,15 +213,20 @@ function draw_background() {
 	endShape();
 }
 
+// checks if the given x and y coordinates are within the area of the input shape
 function check_hitbox(x, y, shape) {
+	// if shape is a circle, check if the coordinate pair lies within a distance
+	// less than the raidus to the center of the circle
 	if (shape.type == "circle") {
 		let r = shape.w / 2;
 		if (dist(x, y, shape.x, shape.y) < r) {
 			return true;
 		}
 	}
+	// if shape is a square, check if the coordinate pair lies within the bounding box
 	else if (shape.type == "square") {
 		let r = shape.w / 2;
+		// check if both x and y are within the side length of the square
 		if (x > shape.x - r && x < shape.x + r && y > shape.y - r && y < shape.y + r) {
 			return true;
 		}
@@ -215,12 +234,16 @@ function check_hitbox(x, y, shape) {
 	return false;
 }
 
+// calculates the velocity of the input shape based on the distance between
+// the mouse and the center of the shape
 function handle_mouse_overlap(shape) {
+	// sets the max velocity the shape can move in a direction
 	let max_v = width * .02;
-	let dir_x = mouseX - pmouseX;
-	let dir_y = mouseY - pmouseY;
+	// get the distance between the mouse and the center in both the x and y directions
 	let dist_x = mouseX - shape.x;
 	let dist_y = mouseY - shape.y;
+	// get the max distance the mouse can be from the center of the shape while still
+	// within the area of the shape depending on the shape type
 	let max_dist = 0;
 	if (shape.type == "circle") {
 		max_dist = shape.w / 2;
@@ -228,20 +251,30 @@ function handle_mouse_overlap(shape) {
 	else if (shape.type == "square") {
 		max_dist = shape.w * Math.sqrt(2);
 	}
+	// the farther away the mouse is from the center, the faster the velocity
+	// in the direction oppsite of the mouse
 	shape.vx = -dist_x / max_dist * max_v;
 	shape.vy = -dist_y / max_dist * max_v;
 }
 
+// updates the position and velocity of the shape based on its current velocity
+// and the input acceleration
 function update_motion(shape, acc) {
+	// if x velocity is 0, no update necessary
 	if (shape.vx != 0) {
+		// if x velocity is positive
 		if (shape.vx > 0) {
+			// set x velocity to 0 if velocity is abt to turn negative and go
+			// in the other direction
 			if (shape.vx - acc < 0) {
 				shape.vx = 0;
 			}
+			// otherwise decrease x velocity by the acceleration
 			else {
 				shape.vx -= acc;
 			}
 		}
+		// if x velocity is negative, vise versa
 		else {
 			if (shape.vx + acc > 0) {
 				shape.vx = 0;
@@ -249,6 +282,7 @@ function update_motion(shape, acc) {
 			shape.vx += acc;
 		}
 	}
+	// same checks as for x velocity but for y velocity
 	if (shape.vy != 0) {
 		if (shape.vy > 0) {
 			if (shape.vy - acc < 0) {
@@ -266,30 +300,37 @@ function update_motion(shape, acc) {
 		}
 	}
 
+	// update the positions with the new velocities
 	shape.x += shape.vx;
 	shape.y += shape.vy;
 }
 
+// draw the Shape objects contained in shapes to canvas
 function draw_shapes(shapes) {
+	// loop through all Shape objects in shapes
 	for (const key in shapes) {
 		let s = shapes[key];
+		// set fill color if fill is provided
 		if (s.fill_color) {
 			fill(s.fill_color);
 		}
+		// otherwise no fill
 		else {
 			noFill();
 		}
-
+		// set stroke color and weight if they are provided
 		if (s.strk_color) {
 			stroke(s.strk_color);
 			if (s.strk_weight) {
 				strokeWeight(s.strk_weight);
 			}
 		}
+		// otherwise no stroke
 		else {
 			noStroke();
 		}
 
+		// set blend mode if provided
 		if (s.blend == "OVERLAY") {
 			blendMode(OVERLAY);
 		}
@@ -306,7 +347,7 @@ function draw_shapes(shapes) {
 			blendMode(MULTIPLY);
 		}
 
-
+		// draw the shape depending on its type
 		if (s.type == 'circle') {
 			ellipse(s.x, s.y, s.w);
 		}
@@ -314,17 +355,23 @@ function draw_shapes(shapes) {
 			rectMode(CENTER);
 			square(s.x, s.y, s.w);
 		}
+		// set blend mode back to default
 		blendMode(BLEND);
 
+		// check if mouse is within the shape
 		if (check_hitbox(mouseX, mouseY, s)) {
+			// adds velocity to shape to repel mouse
 			handle_mouse_overlap(s);
 		}
+		// set the new position and velocity for the shape
 		update_motion(s, .75);
 		
 	}
 }
 
+// set up canvas and init global variable colors
 function setup() {
+	// object containing P5 colors that are commonly reused
 	colors = {
 		bg: color(40, 50, 60),
 		bg_quad: color(220, 160, 80),
@@ -339,26 +386,37 @@ function setup() {
 		pale_pink: color(180, 120, 120, 150),
 		w: color(230, 230, 240)
 	};
+	// create canvas and assign to global variable cnv
+	// canvas has width equal to half the window and height based on set aspect ratio
 	cnv = createCanvas(window.innerWidth / 2, 
 		window.innerWidth / 2 / 475 * 600);
+	// position canvas so it occupies right half of screen
 	cnv.position(window.innerWidth / 2, 0, "absolute");
+	// initialize Shape obejcts to be drawn later
 	init_shapes();
 }
 
+// draws all shapes onto canvas
 function draw() {
+	// set up background
 	draw_background();
+	// draw all pre-square shapes that are occluded by square
 	draw_shapes(pre_shapes);
+	// draw background-colored square
 	var bg_sqr = {w_square_bg: new Shape("square", width * .47, height * .95 / 2, 
 			width * .3, null, colors.bg)};
 	draw_shapes(bg_sqr);
+	// draw all post-square shapes that overlap square
 	draw_shapes(post_shapes);
 }
 
+// on window resize, resize canvas to keep proportion
 function windowResized() {
 	let w = window.innerWidth / 2;
 	let h = window.innerWidth / 2 / 475 * 600;
 	resizeCanvas(w, h);
 	cnv.position(window.innerWidth / 2, 0, "absolute");
+	// reposition all shapes back in initial position relative to canvas
 	init_shapes();
 }
 
