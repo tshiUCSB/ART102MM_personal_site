@@ -4,13 +4,18 @@
 function init_index() {
 	var projects = {
 		studio: {
-			count: 1,
+			count: 2,
 			descrip: "Work from in-class studio time"
 		},
 		project: {
 			count: 1,
 			descrip: "Practicing and applying concepts in creative ways"
 		}
+		// sketch: {
+		// 	count: 0,
+		// 	descrip: "Daily inspirations andd prevention from rustiness",
+		// 	alt_names: ["10/12/20"]
+		// }
 	};
 
 	function create_title(type, descrip) {
