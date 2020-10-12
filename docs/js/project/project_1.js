@@ -341,7 +341,7 @@ function setup() {
 	};
 	cnv = createCanvas(window.innerWidth / 2, 
 		window.innerWidth / 2 / 475 * 600);
-	cnv.position(window.innerWidth / 2, 0, "fixed");
+	cnv.position(window.innerWidth / 2, 0, "absolute");
 	init_shapes();
 }
 
@@ -355,9 +355,11 @@ function draw() {
 }
 
 function windowResized() {
-	cnv.width = window.innerWidth / 2;
-	cnv.height = window.innerWidth / 2 / 475 * 600;
-	cnv.position(window.innerWidth / 2, 0, "fixed");
+	let w = window.innerWidth / 2;
+	let h = window.innerWidth / 2 / 475 * 600;
+	resizeCanvas(w, h);
+	cnv.position(window.innerWidth / 2, 0, "absolute");
+	init_shapes();
 }
 
 
