@@ -75,6 +75,7 @@ body, html {
 
 #citation {
 	padding: 24px 0;
+	font-family: 'geo';
 }
 
 .author {
@@ -154,14 +155,25 @@ body, html {
 	padding: 48px;
 }
 
-#studio {
+.col-count-4 {
 	grid-template-columns: repeat(4, 1fr); 
 }
 
+.showcase-title {
+	place-self: center;
+	padding: 24px;
+}
+
+.showcase-column {
+	padding: 48px 0 128px 0;
+}
+
 .showcase-card {
-	width: 100%;
-	background-color: var(--highlight-color);
-	margin: 48px 0 24px 0;
+	width: 90%;
+	margin: 5%;
+	border-radius: 15px 15px 0 0;
+	border-bottom-style: solid;
+	border-bottom-color: var(--midtone-color);
 }
 
 .showcase-card-info {
@@ -177,11 +189,12 @@ body, html {
 }
 
 .showcase-card-info h2 {
-	margin: 128px;
+	margin: 15%;
+	font-size: 1em;
 }
 
 .showcase-card:hover {
-	background-color: white;
+	border-bottom-color: var(--highlight-color);
 }
 
 .showcase-card-info:hover {

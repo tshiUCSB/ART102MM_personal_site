@@ -1,0 +1,27 @@
+
+body, html {
+	background-color: black;
+}
+
+.half-screen {
+	width: 50vw;
+}
+
+.half-screen img {
+	width: 100%;
+}
+
+.title {
+	text-align: center;
+	display: inline-block;
+	width: 49vw;
+}
+
+#aip {
+	float: left;
+}
+
+#mr {
+	float: right;
+}
+
