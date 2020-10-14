@@ -10,12 +10,12 @@ function init_index() {
 		project: {
 			count: 1,
 			descrip: "Practicing and applying concepts in creative ways"
+		},
+		sketch: {
+			count: 1,
+			descrip: "Daily inspirations and prevention from rustiness",
+			alt_names: ["10/13/20"]
 		}
-		// sketch: {
-		// 	count: 0,
-		// 	descrip: "Daily inspirations andd prevention from rustiness",
-		// 	alt_names: ["10/12/20"]
-		// }
 	};
 
 	function create_title(type, descrip) {
@@ -45,7 +45,7 @@ function init_index() {
 		return columns;
 	}
 
-	function create_card(type, proj_num) {
+	function create_card(type, proj_num, alt_name=null) {
 		let proj = `${type}/${type}_${proj_num}`;
 		let card = document.createElement('div');
 		card.setAttribute("class", "showcase-card hover-expand active-shrink pos-rel");
@@ -58,7 +58,12 @@ function init_index() {
 		info.setAttribute("class", "showcase-card-info pos-abs");
 		let h2 = document.createElement('h2');
 		h2.setAttribute("class", "abs-pos");
-		h2.innerHTML = `${type} ${proj_num}`;
+		if (alt_name) {
+			h2.innerHTML = alt_name;
+		}
+		else {
+			h2.innerHTML = `${type} ${proj_num}`;
+		}
 
 		info.appendChild(h2);
 		link.appendChild(img);
@@ -68,9 +73,15 @@ function init_index() {
 		return card;
 	}
 
-	function populate_columns(columns, type, proj_count) {
+	function populate_columns(columns, type, proj_count, alt_names=null) {
 		for(let i = 0; i < proj_count; i++) {
-			let card = create_card(type, i + 1);
+			let card = null;
+			if (alt_names) {
+				card = create_card(type, i + 1, alt_names[i]);
+			}
+			else {
+				card = create_card(type, i + 1);
+			}
 			let idx = i % columns.length;
 			columns[idx].appendChild(card);
 			console.log(idx);
@@ -83,7 +94,12 @@ function init_index() {
 		let type_descrip = type_data.descrip;
 		let title = create_title(type, type_descrip);
 		let columns = create_columns(col_count, type);
-		populate_columns(columns, type, proj_count);
+		if ("alt_names" in type_data) {
+			populate_columns(columns, type, proj_count, type_data.alt_names);
+		}
+		else {
+			populate_columns(columns, type, proj_count);
+		}
 
 		container.appendChild(title);
 		for(let i = 0; i < columns.length; i++) {
