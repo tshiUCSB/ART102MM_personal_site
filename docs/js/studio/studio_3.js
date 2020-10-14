@@ -21,7 +21,7 @@ function draw() {
 	background(bg_color);
 	imageMode(CENTER);
 	let cube_w = width * .2;
-	let cube_h = cube.w / 930 * 989;
+	let cube_h = cube_w / 930 * 989;
 
 	push()
 	translate(width / 2, height / 2);
