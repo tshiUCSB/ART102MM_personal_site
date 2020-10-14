@@ -11,6 +11,10 @@ function init_index() {
 			count: 1,
 			descrip: "Practicing and applying concepts in creative ways"
 		},
+		writing: {
+			count: 1,
+			descrip: "Reflection on readings with an emphasis on form"
+		},
 		sketch: {
 			count: 1,
 			descrip: "Daily inspirations and prevention from rustiness",
@@ -84,7 +88,6 @@ function init_index() {
 			}
 			let idx = i % columns.length;
 			columns[idx].appendChild(card);
-			console.log(idx);
 		}
 	}
 
