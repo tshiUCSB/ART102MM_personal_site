@@ -38,7 +38,9 @@ function touchEnded() {
 	bg_color = "#000";
 }
 
-
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+}
 
 
 
