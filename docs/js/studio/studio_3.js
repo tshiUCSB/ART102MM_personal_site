@@ -21,8 +21,12 @@ function draw() {
 	imageMode(CENTER);
 	let cube_w = width * .1;
 	let cube_h = width * .1 / 930 * 989;
+
+	push()
+	translate(width / 2, height / 2);
 	rotate(rotationZ);
-	image(cube.src, width / 2, height / 2, cube_w, cube_h);
+	image(cube.src, 0, 0, cube_w, cube_h);
+	pop()
 }
 
 
