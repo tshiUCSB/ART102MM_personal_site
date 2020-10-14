@@ -30,11 +30,11 @@ function draw() {
 	pop()
 }
 
-function touchStart() {
+function touchStarted() {
 	bg_color = "#fff";
 }
 
-function touchEnd() {
+function touchEnded() {
 	bg_color = "#000";
 }
 
