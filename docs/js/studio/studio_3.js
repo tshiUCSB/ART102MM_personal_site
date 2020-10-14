@@ -6,6 +6,7 @@ URL: https://tshiucsb.github.io/ART102MM_personal_site/html/studio/studio_3.html
 */
 
 var cube = null;
+var bg_color = "#000";
 
 function preload() {
 	cube = {};
@@ -17,10 +18,10 @@ function setup() {
 }
 
 function draw() {
-	background("#000");
+	background(bg_color);
 	imageMode(CENTER);
-	let cube_w = width * .1;
-	let cube_h = width * .1 / 930 * 989;
+	let cube_w = width * .2;
+	let cube_h = cube.w / 930 * 989;
 
 	push()
 	translate(width / 2, height / 2);
@@ -28,6 +29,15 @@ function draw() {
 	image(cube.src, 0, 0, cube_w, cube_h);
 	pop()
 }
+
+function touchStart() {
+	bg_color = "#fff";
+}
+
+function touchEnd() {
+	bg_color = "#000";
+}
+
 
 
 
