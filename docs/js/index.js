@@ -16,9 +16,9 @@ function init_index() {
 			descrip: "Reflection on readings with an emphasis on form"
 		},
 		sketch: {
-			count: 1,
+			count: 2,
 			descrip: "Daily inspirations and prevention from rustiness",
-			alt_names: ["10/13/20"]
+			alt_names: ["10/13/20", "10/15/20"]
 		}
 	};
 
