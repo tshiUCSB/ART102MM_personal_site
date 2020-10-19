@@ -21,13 +21,14 @@ function init_hex_cat() {
 		face_h: 120,
 		curr_img: null,
 		start_frame: null,
+		anim_frame: null,
 		colors: [color(215, 19, 67), "#232323"],
 		assets: {
 			off: {
 				count: 1
 			},
 			neutral: {
-				count: 1
+				count: 4
 			}
 		},
 		misc: {},
@@ -39,6 +40,19 @@ function init_hex_cat() {
 					arr.push(loadImage(`${path}${key}_${i + 1}.png`));
 				}
 				this.assets[key].img = arr;
+				this.assets[key].idx = 0;
+			}
+		},
+		animate_frames: function(frame_time, asset) {
+			let curr_frame = frameCount;
+			let elapsed = curr_frame - hex_cat.anim_frame;
+			if (elapsed > frame_time) {
+				let frames = asset.img;
+				let idx = asset.idx;
+				let total = frames.length;
+				asset.idx = (idx + 1) % total;
+				hex_cat.curr_img = frames[asset.idx];
+				hex_cat.anim_frame = curr_frame;
 			}
 		},
 		draw_boot_icon: function(icon_color) {
@@ -108,6 +122,7 @@ function init_hex_cat() {
 				hex_cat.curr_img = hex_cat.assets.neutral.img[0];
 				hex_cat.state = "NEUTRAL";
 				hex_cat.start_frame = null;
+				hex_cat.anim_frame = frameCount;
 				cursor(ARROW);
 			}
 			if (hex_cat.curr_img == hex_cat.assets.neutral.img[0]) {
@@ -219,6 +234,10 @@ function draw() {
 	}
 	else if (hex_cat.state == "SAD") {
 		hex_cat.sad();
+	}
+
+	if (hex_cat.state == "NEUTRAL" || hex_cat.state == "PET" || hex_cat.state == "PET_MORE") {
+		hex_cat.animate_frames(10, hex_cat.assets.neutral);
 	}
 
 }
