@@ -19,7 +19,6 @@ function init_hex_cat() {
 		face_y: 220,
 		face_w: 150,
 		face_h: 120,
-		face_display: "",
 		curr_img: null,
 		start_frame: null,
 		colors: [color(215, 19, 67), "#232323"],
@@ -69,6 +68,15 @@ function init_hex_cat() {
 			}
 			hex_cat.draw_boot_icon(boot_color);
 		},
+		draw_text: function(face_display) {
+			fill(hex_cat.colors[0]);
+			textAlign(CENTER);
+			textSize(60 * hex_cat.scale);
+			noStroke();
+			text(face_display, (hex_cat.face_x + hex_cat.pos_x) * hex_cat.scale, 
+					(hex_cat.face_y + hex_cat.face_h / 2 + hex_cat.pos_y) * hex_cat.scale,
+					hex_cat.face_w * hex_cat.scale, hex_cat.face_h * hex_cat.scale);
+		},
 		boot: function() {
 			let curr_frame = frameCount;
 			let elapsed = curr_frame - hex_cat.start_frame;
@@ -100,10 +108,6 @@ function init_hex_cat() {
 				hex_cat.curr_img = hex_cat.assets.neutral.img[0];
 				hex_cat.state = "NEUTRAL";
 				hex_cat.start_frame = null;
-				hex_cat.misc["gaze_x"] = (hex_cat.face_x + hex_cat.face_w / 2 + hex_cat.pos_x) 
-					* hex_cat.scale;
-				hex_cat.misc["gaze_y"] = (hex_cat.face_y + hex_cat.face_h / 2 + hex_cat.pos_y) 
-					* hex_cat.scale;
 				cursor(ARROW);
 			}
 			if (hex_cat.curr_img == hex_cat.assets.neutral.img[0]) {
@@ -149,19 +153,36 @@ function init_hex_cat() {
 		disapprove: function() {
 			let curr_frame = frameCount;
 			let elapsed = curr_frame - hex_cat.start_frame;
-			fill(hex_cat.colors[0]);
-			textAlign(CENTER);
-			textSize(60 * hex_cat.scale);
-			noStroke();
-			text(":((", (hex_cat.face_x + hex_cat.pos_x) * hex_cat.scale, 
-					(hex_cat.face_y + hex_cat.face_h / 2 + hex_cat.pos_y) * hex_cat.scale,
-					hex_cat.face_w * hex_cat.scale, hex_cat.face_h * hex_cat.scale);
+			hex_cat.draw_text(":((");
 			if (elapsed > 100) {
 				hex_cat.start_frame = null;
 				hex_cat.state = "NEUTRAL";
 			}
+		},
+		pet: function() {
+			hex_cat.draw_text("<3");
+		},
+		pet_more: function() {
+			let curr_frame = frameCount;
+			let elapsed = curr_frame - hex_cat.start_frame;
+			hex_cat.draw_text("<3");
+			if (elapsed > 100) {
+				hex_cat.state = "SAD";
+				hex_cat.start_frame = frameCount;
+			}
+		},
+		sad: function() {
+			let curr_frame = frameCount;
+			let elapsed = curr_frame - hex_cat.start_frame;
+			hex_cat.draw_text(";-;");
+			if (elapsed > 100) {
+				hex_cat.state = "NEUTRAL";
+				hex_cat.start_frame = null;
+			}
 		}
 	}
+	hex_cat.pos_x = windowWidth / 2 - hex_cat.w / 2 * hex_cat.scale;
+	hex_cat.pos_y = windowHeight / 2 - hex_cat.h /2 * hex_cat.scale;
 }
 
 function preload() {
@@ -190,6 +211,15 @@ function draw() {
 	else if (hex_cat.state == "DISPLEASED") {
 		hex_cat.disapprove();
 	}
+	else if (hex_cat.state == "PET") {
+		hex_cat.pet();
+	}
+	else if (hex_cat.state == "PET_MORE") {
+		hex_cat.pet_more();
+	}
+	else if (hex_cat.state == "SAD") {
+		hex_cat.sad();
+	}
 
 }
 
@@ -200,7 +230,7 @@ function mouseClicked() {
 		hex_cat.start_frame = frameCount;
 		cursor(WAIT);
 	}
-	else if (hex_cat.state = "NEUTRAL") {
+	else if (hex_cat.state == "NEUTRAL") {
 		let c1 = get(mouseX, mouseY);
 		let c2 = hex_cat.colors[0];
 		if (c1[0] == red(c2) && c1[1] == green(c2) && c1[2] == blue(c2) && c1[3] != 0) {
@@ -210,4 +240,31 @@ function mouseClicked() {
 	}
 }
 
+function mousePressed() {
+	hex_cat.misc["mouse_down_x"] = mouseX;
+	hex_cat.misc["mouse_down_y"] = mouseY;
+}
+
+function mouseDragged() {
+	let is_curr_mouse_black = false;
+	let is_down_mouse_black = false;
+	let md_c = get(hex_cat.misc["mouse_down_x"], hex_cat.misc["mouse_down_y"]);
+	let curr_c = get(mouseX, mouseY);
+	let dx = 1 * hex_cat.scale;
+	let dy = 1 * hex_cat.scale;
+	if (md_c[0] == 0 && md_c[1] == 0 && md_c[2] == 0 && md_c[3] != 0) {
+		is_down_mouse_black = true;
+	}
+	if (curr_c[0] == 0 && curr_c[1] == 0 && curr_c[2] == 0 && curr_c[3] != 0) {
+		is_curr_mouse_black = true;
+	}
+	if (hex_cat.state == "NEUTRAL" && is_curr_mouse_black && is_down_mouse_black 
+		&& (movedX > dx || movedY > dy)) {
+		hex_cat.state = "PET";
+	}
+	else if (hex_cat.state == "PET") {
+		hex_cat.state =  "PET_MORE";
+		hex_cat.start_frame = frameCount;
+	}
+}
 
