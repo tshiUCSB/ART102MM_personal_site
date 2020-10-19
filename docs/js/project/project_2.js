@@ -313,3 +313,18 @@ function mouseDragged() {
 	}
 }
 
+window.addEventListener('load', function() {
+	var info = document.getElementById("info");
+	var is_displayed = true;
+	info.addEventListener('click', function() {
+		if (is_displayed) {
+			info.style.height = "14px";
+			is_displayed = false;
+		}
+		else {
+			info.style.height = "initial";
+			is_displayed = true;
+		}
+	});
+});
+

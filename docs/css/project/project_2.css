@@ -1,0 +1,15 @@
+
+#info {
+	position: fixed;
+	background: rgba(0, 0, 0, .8);
+	border-radius: 10px;
+	padding: 36px 48px 48px 48px;
+	margin: 24px;
+	width: 25vw;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+#info:hover {
+	background: rgba(0, 0, 0, .9);
+}
