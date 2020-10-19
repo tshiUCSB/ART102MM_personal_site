@@ -5,6 +5,7 @@ Code by Tina Shi
 URL: https://tshiucsb.github.io/ART102MM_personal_site/html/project/project_2.html
 */
 
+// variable for storing all data regarding robot
 var hex_cat = null;
 
 function init_hex_cat() {
@@ -29,6 +30,12 @@ function init_hex_cat() {
 			},
 			neutral: {
 				count: 4
+			},
+			pet: {
+				count: 4
+			},
+			displeased: {
+				count: 1
 			}
 		},
 		misc: {},
@@ -43,12 +50,14 @@ function init_hex_cat() {
 				this.assets[key].idx = 0;
 			}
 		},
-		animate_frames: function(frame_time, asset) {
+		animate_frames: function(frame_time, asset, idx=null) {
 			let curr_frame = frameCount;
 			let elapsed = curr_frame - hex_cat.anim_frame;
 			if (elapsed > frame_time) {
 				let frames = asset.img;
-				let idx = asset.idx;
+				if (idx === null) {
+					idx = asset.idx;
+				}
 				let total = frames.length;
 				asset.idx = (idx + 1) % total;
 				hex_cat.curr_img = frames[asset.idx];
@@ -169,6 +178,7 @@ function init_hex_cat() {
 			let curr_frame = frameCount;
 			let elapsed = curr_frame - hex_cat.start_frame;
 			hex_cat.draw_text(":((");
+			hex_cat.curr_img = hex_cat.assets.displeased.img[0];
 			if (elapsed > 100) {
 				hex_cat.start_frame = null;
 				hex_cat.state = "NEUTRAL";
@@ -236,8 +246,11 @@ function draw() {
 		hex_cat.sad();
 	}
 
-	if (hex_cat.state == "NEUTRAL" || hex_cat.state == "PET" || hex_cat.state == "PET_MORE") {
+	if (hex_cat.state == "NEUTRAL") {
 		hex_cat.animate_frames(10, hex_cat.assets.neutral);
+	}
+	else if (hex_cat.state == "PET" || hex_cat.state == "PET_MORE") {
+		hex_cat.animate_frames(5, hex_cat.assets.pet);
 	}
 
 }
