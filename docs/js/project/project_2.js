@@ -313,6 +313,11 @@ function mouseDragged() {
 	}
 }
 
+function windowResized() {
+	hex_cat.pos_x = windowWidth / 2 - hex_cat.w / 2 * hex_cat.scale;
+	hex_cat.pos_y = windowHeight / 2 - hex_cat.h /2 * hex_cat.scale;
+}
+
 window.addEventListener('load', function() {
 	var info = document.getElementById("info");
 	var is_displayed = true;
