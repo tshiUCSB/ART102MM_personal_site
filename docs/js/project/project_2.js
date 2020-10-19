@@ -9,6 +9,7 @@ URL: https://tshiucsb.github.io/ART102MM_personal_site/html/project/project_2.ht
 var hex_cat = null;
 
 function init_hex_cat() {
+	// initializes data stored in hex_cat
 	hex_cat = {
 		state: "OFF",
 		pos_x: 0,
@@ -20,10 +21,15 @@ function init_hex_cat() {
 		face_y: 220,
 		face_w: 150,
 		face_h: 120,
+		// currently displayed image
 		curr_img: null,
+		// animation frame for keeping track of duration for states
 		start_frame: null,
+		// animation frame for keeping track of animation
 		anim_frame: null,
+		// index 0 is highlight color and index 1 is midtone color
 		colors: [color(215, 19, 67), "#232323"],
+		// object for storing preloaded images and the total number of frames for each state
 		assets: {
 			off: {
 				count: 1
@@ -38,18 +44,24 @@ function init_hex_cat() {
 				count: 1
 			}
 		},
+		// object for storing miscellaneous values that needed to persist
 		misc: {},
+		// function for preloading images
 		load_assets: function() {
+			// loop through the states with specified assets and load the frames into an array
 			for(const key in this.assets) {
 				let arr = [];
 				let path = "../../assets/project/project_2/"
 				for(let i = 0; i < this.assets[key].count; i++) {
 					arr.push(loadImage(`${path}${key}_${i + 1}.png`));
 				}
+				// array containing frames
 				this.assets[key].img = arr;
+				// index for keeping track of the frame that animation is on
 				this.assets[key].idx = 0;
 			}
 		},
+		// displays the animation frames in order after a certain number of frames has passed
 		animate_frames: function(frame_time, asset, idx=null) {
 			let curr_frame = frameCount;
 			let elapsed = curr_frame - hex_cat.anim_frame;
@@ -59,11 +71,14 @@ function init_hex_cat() {
 					idx = asset.idx;
 				}
 				let total = frames.length;
+				// update frame index
+				// if the frame index is more than the number of frames available, go back to first frame
 				asset.idx = (idx + 1) % total;
 				hex_cat.curr_img = frames[asset.idx];
 				hex_cat.anim_frame = curr_frame;
 			}
 		},
+		// draw the turn on icon on the face of the cat
 		draw_boot_icon: function(icon_color) {
 			stroke(icon_color);
 			strokeWeight(5);
@@ -167,8 +182,6 @@ function init_hex_cat() {
 			else if (y > (hex_cat.face_y + hex_cat.face_h + hex_cat.pos_y) * hex_cat.scale) {
 				y = (hex_cat.face_y + hex_cat.face_h + hex_cat.pos_y) * hex_cat.scale;
 			}
-			hex_cat.misc.gaze_x = x;
-			hex_cat.misc.gaze_y = y;
 			noFill();
 			stroke(hex_cat.colors[0]);
 			strokeWeight(5);
