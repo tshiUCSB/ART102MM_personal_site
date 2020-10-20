@@ -22,6 +22,37 @@ function init_index() {
 		}
 	};
 
+	var navigation_items = [["about", "About"], ["quote", "Quote"], 
+		["artist-rec", "Artist Highlight"], ["gesture", "Website Recommendation"],
+		["studio", "Studio"], ["project", "Project"], ["writing", "Writing"],
+		["sketch", "Sketch"], [null, "GitHub"]];
+
+	var NAV_ICON = document.getElementById("nav-icon");
+	var NAV_ICON_BARS = document.getElementsByClassName("nav-icon-bar");
+	var NAVIGATION = document.getElementById("navigation");
+
+	function create_nav_item(nav_data) {
+		let link = document.createElement('a');
+		if (nav_data[0] == null && nav_data[1] == "GitHub") {
+			link.setAttribute("href", "https://github.com/tshiUCSB/ART102MM_personal_site");
+		}
+		else {
+			link.setAttribute("href", `#${nav_data[0]}`);
+		}
+		let nav_item = document.createElement('div');
+		nav_item.setAttribute("class", "nav-item active-shrink");
+		nav_item.innerHTML = nav_data[1];
+		link.appendChild(nav_item);
+		return link;
+	}
+
+	function populate_navigation(container, nav_items) {
+		for(let i = 0; i < nav_items.length; i++) {
+			let nav_item = create_nav_item(nav_items[i]);
+			container.appendChild(nav_item);
+		}
+	}
+
 	function create_title(type, descrip) {
 		let title = document.createElement('div');
 		title.setAttribute("class", "grid-item showcase-title");
@@ -119,7 +150,21 @@ function init_index() {
 		}
 	}
 
+	NAV_ICON.addEventListener('click', function() {
+		if (NAVIGATION.style.display != "none") {
+			NAVIGATION.style.display = "none";
+		}
+		else {
+			NAVIGATION.style.display = "initial";
+			for(let i = 0; i < NAV_ICON_BARS.length; i++) {
+				NAV_ICON_BARS[i].setAttribute("class", NAV_ICON_BARS[i].getAttribute("class") + " nav-icon-anim");
+			}
+		}
+	})
+
 	generate_projects();
+	NAVIGATION.style.display = "none";
+	populate_navigation(NAVIGATION, navigation_items);
 
 }
 

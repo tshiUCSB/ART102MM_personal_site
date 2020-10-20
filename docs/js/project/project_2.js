@@ -78,7 +78,7 @@ function init_hex_cat() {
 				hex_cat.anim_frame = curr_frame;
 			}
 		},
-		// draw the turn on icon on the face of the cat
+		// draw the power icon on the face of the cat
 		draw_boot_icon: function(icon_color) {
 			stroke(icon_color);
 			strokeWeight(5);
@@ -90,6 +90,7 @@ function init_hex_cat() {
 				(this.face_x + this.face_w / 2 + this.pos_x) * this.scale,
 				(this.face_y + this.face_h / 2 + this.pos_y - 60) * this.scale);
 		},
+		// if cursor is within face region, change state to "CAN BOOT"
 		while_off: function() {
 			let boot_color = hex_cat.colors[1];
 			if (mouseX > (hex_cat.face_x + hex_cat.pos_x) * hex_cat.scale &&
@@ -106,6 +107,7 @@ function init_hex_cat() {
 			}
 			hex_cat.draw_boot_icon(boot_color);
 		},
+		// draw text on face region based on input argument
 		draw_text: function(face_display) {
 			fill(hex_cat.colors[0]);
 			textAlign(CENTER);
@@ -115,10 +117,13 @@ function init_hex_cat() {
 					(hex_cat.face_y + hex_cat.face_h / 2 + hex_cat.pos_y) * hex_cat.scale,
 					hex_cat.face_w * hex_cat.scale, hex_cat.face_h * hex_cat.scale);
 		},
+		// draw animation for face, ears, and tail tip to flash crimson 
+		// and the transition to "NEUTRAL" state
 		boot: function() {
 			let curr_frame = frameCount;
 			let elapsed = curr_frame - hex_cat.start_frame;
 			let display_loading = false;
+			// alternate between grey and crimson depending on elapsed frames
 			if (elapsed < 20) {
 				hex_cat.curr_img = hex_cat.assets.neutral.img[0];
 			}
@@ -141,6 +146,7 @@ function init_hex_cat() {
 			else if (elapsed < 180) {
 				hex_cat.curr_img = hex_cat.assets.neutral.img[0];
 			}
+			// transition to neutral
 			else if (elapsed > 200) {
 				display_loading = false;
 				hex_cat.curr_img = hex_cat.assets.neutral.img[0];
@@ -149,6 +155,7 @@ function init_hex_cat() {
 				hex_cat.anim_frame = frameCount;
 				cursor(ARROW);
 			}
+			// color in face region
 			if (hex_cat.curr_img == hex_cat.assets.neutral.img[0]) {
 				fill(hex_cat.colors[0]);
 			}
@@ -159,6 +166,7 @@ function init_hex_cat() {
 			rect((hex_cat.face_x + hex_cat.pos_x) * hex_cat.scale, 
 				(hex_cat.face_y + hex_cat.pos_y) * hex_cat.scale,
 				hex_cat.face_w * hex_cat.scale, hex_cat.face_h * hex_cat.scale);
+			// display loading text on face
 			if (display_loading) {
 				fill(hex_cat.colors[0]);
 				textAlign(CENTER);
@@ -167,9 +175,11 @@ function init_hex_cat() {
 					hex_cat.face_w * hex_cat.scale, hex_cat.face_h * hex_cat.scale);
 			}
 		},
+		// draw circle in face region that follows the cursor
 		gaze: function() {
 			let x = mouseX;
 			let y = mouseY;
+			// checks for if cursor is out of face region to make circle stay in bound
 			if (x < (hex_cat.face_x + hex_cat.pos_x) * hex_cat.scale) {
 				x = (hex_cat.face_x + hex_cat.pos_x) * hex_cat.scale;
 			}
@@ -182,11 +192,13 @@ function init_hex_cat() {
 			else if (y > (hex_cat.face_y + hex_cat.face_h + hex_cat.pos_y) * hex_cat.scale) {
 				y = (hex_cat.face_y + hex_cat.face_h + hex_cat.pos_y) * hex_cat.scale;
 			}
+			// draw circle
 			noFill();
 			stroke(hex_cat.colors[0]);
 			strokeWeight(5);
 			circle(x, y, 20 * hex_cat.scale);
 		},
+		// draw displeased asset with face text :(( and then transition to "NEUTRAL" state
 		disapprove: function() {
 			let curr_frame = frameCount;
 			let elapsed = curr_frame - hex_cat.start_frame;
@@ -197,9 +209,11 @@ function init_hex_cat() {
 				hex_cat.state = "NEUTRAL";
 			}
 		},
+		// draw face text <3
 		pet: function() {
 			hex_cat.draw_text("<3");
 		},
+		// draw face text <3 and then transition to "SAD" state
 		pet_more: function() {
 			let curr_frame = frameCount;
 			let elapsed = curr_frame - hex_cat.start_frame;
@@ -209,6 +223,7 @@ function init_hex_cat() {
 				hex_cat.start_frame = frameCount;
 			}
 		},
+		// 
 		sad: function() {
 			let curr_frame = frameCount;
 			let elapsed = curr_frame - hex_cat.start_frame;
@@ -219,10 +234,12 @@ function init_hex_cat() {
 			}
 		}
 	}
+	// set position to center of canvas
 	hex_cat.pos_x = windowWidth / 2 - hex_cat.w / 2 * hex_cat.scale;
 	hex_cat.pos_y = windowHeight / 2 - hex_cat.h /2 * hex_cat.scale;
 }
 
+// initialzie hex_cat and preload assets
 function preload() {
 	init_hex_cat();
 	hex_cat.load_assets();
@@ -235,8 +252,10 @@ function setup() {
 
 function draw() {
 	background("#fff");
+	// draw hex_cat
 	image(hex_cat.curr_img, hex_cat.pos_x, hex_cat.pos_y, 
 		hex_cat.w * hex_cat.scale, hex_cat.h * hex_cat.scale);
+	// call different behaviors based on hex_cat state
 	if (hex_cat.state == "OFF" || hex_cat.state == "CAN_BOOT") {
 		hex_cat.while_off();
 	}
@@ -259,9 +278,11 @@ function draw() {
 		hex_cat.sad();
 	}
 
+	// play neutral animation
 	if (hex_cat.state == "NEUTRAL") {
 		hex_cat.animate_frames(10, hex_cat.assets.neutral);
 	}
+	// play pleased animation from petting
 	else if (hex_cat.state == "PET" || hex_cat.state == "PET_MORE") {
 		hex_cat.animate_frames(5, hex_cat.assets.pet);
 	}
@@ -269,15 +290,19 @@ function draw() {
 }
 
 function mouseClicked() {
+	// if mouse clicked in "CAN BOOT" state, transitoin to "BOOTING" state
 	if (hex_cat.state == "CAN_BOOT") {
 		hex_cat.state = "BOOTING";
 		console.log("booting");
 		hex_cat.start_frame = frameCount;
 		cursor(WAIT);
 	}
+	// if mouse clicked in "NEUTRAL" state and is clicked in a crimson region
+	// e.g. ears, collar, tail tip, transition to "DISPLEASED" state
 	else if (hex_cat.state == "NEUTRAL") {
 		let c1 = get(mouseX, mouseY);
 		let c2 = hex_cat.colors[0];
+		// check if the pixel at mouse click is crimson
 		if (c1[0] == red(c2) && c1[1] == green(c2) && c1[2] == blue(c2) && c1[3] != 0) {
 			hex_cat.state = "DISPLEASED";
 			hex_cat.start_frame = frameCount;
@@ -285,12 +310,16 @@ function mouseClicked() {
 	}
 }
 
+// if mouse if pressed down, record pressed position
 function mousePressed() {
 	hex_cat.misc["mouse_down_x"] = mouseX;
 	hex_cat.misc["mouse_down_y"] = mouseY;
 }
 
 function mouseDragged() {
+	// if the drag started at a black pixel, the cursor is currently on a black pixel,
+	// and there is at least some mouse movement in either the x or y direcction
+	// transition to "PET" state
 	let is_curr_mouse_black = false;
 	let is_down_mouse_black = false;
 	let md_c = get(hex_cat.misc["mouse_down_x"], hex_cat.misc["mouse_down_y"]);
@@ -303,21 +332,34 @@ function mouseDragged() {
 	if (curr_c[0] == 0 && curr_c[1] == 0 && curr_c[2] == 0 && curr_c[3] != 0) {
 		is_curr_mouse_black = true;
 	}
-	if (hex_cat.state == "NEUTRAL" && is_curr_mouse_black && is_down_mouse_black 
+	if (is_curr_mouse_black && is_down_mouse_black 
 		&& (movedX > dx || movedY > dy)) {
 		hex_cat.state = "PET";
 	}
+	// if no longer detected as petting and current state is "PET"
+	// transition to "PET_MORE" state
 	else if (hex_cat.state == "PET") {
 		hex_cat.state =  "PET_MORE";
 		hex_cat.start_frame = frameCount;
 	}
 }
 
+function mouseReleased() {
+	// if mouse is released from petting, transition to "PET_MORE" state
+	if (hex_cat.state == "PET") {
+		hex_cat.state =  "PET_MORE";
+		hex_cat.start_frame = frameCount;
+	}
+}
+
 function windowResized() {
+	// reposition hex_cat to center of canvas if window resized
+	resizeCanvas(windowWidth, windowHeight);
 	hex_cat.pos_x = windowWidth / 2 - hex_cat.w / 2 * hex_cat.scale;
 	hex_cat.pos_y = windowHeight / 2 - hex_cat.h /2 * hex_cat.scale;
 }
 
+// on window load event, allow info panel to expand and hide on click
 window.addEventListener('load', function() {
 	var info = document.getElementById("info");
 	var is_displayed = true;

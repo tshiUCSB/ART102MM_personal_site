@@ -46,12 +46,49 @@ body, html {
 	font-family: 'Abel', sans-serif;
 }
 
+a {
+	text-decoration: none
+}
+
+.navigation {
+	width: 60%;
+	height: 80%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 200;
+	overflow-y: scroll;
+	display: none;
+}
+
+.nav-item {
+	width: 100%;
+	text-align: center;
+	font-size: 2em;
+	background-color: rgba(0, 0, 0, .5);
+	padding: 24px 0;
+	margin: 24px 0;
+	border-radius: 15px;
+	color: white;
+}
+
+.nav-item:hover {
+	color: var(--highlight-color);
+	background-color: rgba(0, 0, 0, .8);
+	cursor: pointer;
+}
+
+.navigation::-webkit-scrollbar {
+	background-color: rgba(0, 0, 0, 0);
+}
+
 .nav-icon {
 	width: 48px;
 	height: 48px;
 	z-index: 200;
 	right: 48px;
 	top: 48px;
+	cursor: pointer;
 }
 
 .nav-icon-bar {
@@ -63,9 +100,16 @@ body, html {
 }
 
 .nav-icon-anim {
-	animation-duration: 2s;
-	animation-iteration-count: 1;
 	animation-fill-mode: forwards;
+	animation-direction: alternate;
+}
+
+.nav-icon-tb-anim {
+	animation-duration: 2s;
+}
+
+.nav-icon-mid-anim {
+	animation-duration: .6s;
 }
 
 .nav-icon-bar-top {
@@ -77,7 +121,6 @@ body, html {
 .nav-icon-bar-mid {
 	transform: translateY(-50%);
 	animation-name: shrink-disappear;
-	animation-duration: .6s;
 }
 
 .nav-icon-bar-bottom {
