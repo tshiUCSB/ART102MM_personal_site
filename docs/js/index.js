@@ -12,7 +12,7 @@ function init_index() {
 			descrip: "Practicing and applying concepts in creative ways"
 		},
 		writing: {
-			count: 1,
+			count: 2,
 			descrip: "Reflection on readings with an emphasis on form"
 		},
 		sketch: {
