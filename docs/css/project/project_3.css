@@ -1,0 +1,35 @@
+
+body, html {
+}
+
+#content-container {
+	width: 60vw;
+	z-index: 200;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#msg-input {
+	width: 60%;
+	text-align: center;
+	border-radius: 15px;
+}
+
+#p5-canvas {
+	background-color: #000;
+}
+
+#resource {
+	bottom: 0;
+	width: 100vw;
+	height: 48px;
+}
+
+.full-screen {
+	width: 100vw;
+	height: 100vh;
+}
+
+
