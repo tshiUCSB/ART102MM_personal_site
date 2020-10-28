@@ -4,7 +4,7 @@
 function init_index() {
 	var projects = {
 		studio: {
-			count: 6,
+			count: 7,
 			descrip: "Work from in-class studio time"
 		},
 		project: {
