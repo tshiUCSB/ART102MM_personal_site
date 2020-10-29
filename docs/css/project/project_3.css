@@ -46,6 +46,11 @@ body, html {
 	height: 48px;
 }
 
+#tested-devices {
+	display: inline-block;
+	color: grey;
+}
+
 .full-screen {
 	width: 100vw;
 	height: 100vh;
