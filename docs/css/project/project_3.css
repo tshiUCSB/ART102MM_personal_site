@@ -1,5 +1,16 @@
 
 body, html {
+	background-color: #000;
+}
+
+#title {
+	color: crimson;
+	font-size: 5em;
+	width: 100vw;
+	text-align: center;
+	top: 33%;
+	transform: translateY(-50%);
+	letter-spacing: 1em
 }
 
 #content-container {
@@ -9,7 +20,9 @@ body, html {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	color: black;
+	color: white;
+/*	font-family: "Rajdhani";
+*/	letter-spacing: .15em;
 }
 
 #msg-input {
@@ -21,10 +34,10 @@ body, html {
 	color: white;
 	border-style: solid;
 	border-color: white;
+	font-family: "Geo";
 }
 
 #p5-canvas {
-	background-color: #000;
 }
 
 #resource {
@@ -36,6 +49,16 @@ body, html {
 .full-screen {
 	width: 100vw;
 	height: 100vh;
+}
+
+a {
+	color: grey;
+	display: inline-block;
+	margin: 14px;
+}
+
+a:hover {
+	color: crimson;
 }
 
 
