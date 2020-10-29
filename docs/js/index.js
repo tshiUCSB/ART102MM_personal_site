@@ -8,7 +8,7 @@ function init_index() {
 			descrip: "Work from in-class studio time"
 		},
 		project: {
-			count: 2,
+			count: 3,
 			descrip: "Practicing and applying concepts in creative ways"
 		},
 		writing: {
