@@ -13,8 +13,8 @@ var deviceX = undefined;
 var deviceY = undefined;
 
 function check_permission() {
-	if (typeof(DeviceOrientationEvent) !== 'undefined' 
-		&& typeof(DeviceOrientationEvent.requestPermission) === 'function') {
+	if (typeof(window.DeviceOrientationEvent) !== 'undefined' 
+		&& typeof(window.DeviceOrientationEvent.requestPermission) === 'function') {
 		button = createButton("Allow access to sensors");
 		button.style("font-size", "24px");
 		button.center();
@@ -37,8 +37,8 @@ function setup() {
 
 function draw() {
 	if (!permissionGranted) return;
-	deviceX += constrain(rotationY, -3, 3);
-	deviceY += constrain(rotationX, -3, 3);
+	deviceX -= constrain(rotationX, -3, 3);
+	deviceY += constrain(rotationY, -3, 3);
 
 	deviceX = constrain(deviceX, 0, width);
 	deviceY = constrain(deviceY, 0, height);
