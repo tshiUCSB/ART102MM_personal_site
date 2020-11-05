@@ -41,13 +41,36 @@ body, html {
 	display: grid;
 }
 
+.display-block {
+	display: block;
+}
+
+.bottom-left {
+	bottom: 0;
+	left: 0;
+}
+
 .mass-text {
 	font-family: 'Rajdhani', sans-serif;
 	font-family: 'Abel', sans-serif;
 }
 
+.full-screen {
+	width: 100vw;
+	height: 100vh;
+}
+
+.white-to-crimson-text {
+	color: white;
+}
+
+.white-to-crimson-text:hover {
+	color: var(--highlight-color);
+}
+
 a {
-	text-decoration: none
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .navigation {

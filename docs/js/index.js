@@ -4,8 +4,9 @@
 function init_index() {
 	var projects = {
 		studio: {
-			count: 8,
+			count: 9,
 			descrip: "Work from in-class studio time"
+			// alt_links: {'8': "app/studio_9/public/studio_9.html"}
 		},
 		project: {
 			count: 3,
@@ -80,12 +81,17 @@ function init_index() {
 		return columns;
 	}
 
-	function create_card(type, proj_num, alt_name=null) {
+	function create_card(type, proj_num, alt_name=undefined, alt_link=undefined) {
 		let proj = `${type}/${type}_${proj_num}`;
 		let card = document.createElement('div');
 		card.setAttribute("class", "showcase-card hover-expand active-shrink pos-rel");
 		let link = document.createElement('a');
-		link.setAttribute("href", `html/${proj}.html`);
+		if (alt_link) {
+			link.setAttribute("href", alt_link);
+		}
+		else {
+			link.setAttribute("href", `html/${proj}.html`);
+		}
 		let img = document.createElement('img');
 		img.setAttribute("src", `assets/thumbnails/${proj}.png`);
 		img.setAttribute("class", "showcase-card-thumbnail");
@@ -108,15 +114,18 @@ function init_index() {
 		return card;
 	}
 
-	function populate_columns(columns, type, proj_count, alt_names=null) {
+	function populate_columns(columns, type, proj_count, alt_names=undefined, alt_links=undefined) {
 		for(let i = 0; i < proj_count; i++) {
 			let card = null;
+			let alt_name = undefined;
+			let alt_link = undefined;
 			if (alt_names) {
-				card = create_card(type, i + 1, alt_names[i]);
+				alt_name = alt_names[i];
 			}
-			else {
-				card = create_card(type, i + 1);
+			if (alt_links && i in alt_links) {
+				alt_link = alt_links[i];
 			}
+			card = create_card(type, i + 1, alt_name, alt_link);
 			let idx = i % columns.length;
 			columns[idx].appendChild(card);
 		}
@@ -128,12 +137,15 @@ function init_index() {
 		let type_descrip = type_data.descrip;
 		let title = create_title(type, type_descrip);
 		let columns = create_columns(col_count, type);
+		let alt_names = undefined;
+		let alt_links = undefined;
 		if ("alt_names" in type_data) {
-			populate_columns(columns, type, proj_count, type_data.alt_names);
+			alt_names = type_data.alt_names;
 		}
-		else {
-			populate_columns(columns, type, proj_count);
+		if ("alt_links" in type_data) {
+			alt_links = type_data.alt_links;
 		}
+		populate_columns(columns, type, proj_count, alt_names, alt_links);
 
 		container.appendChild(title);
 		for(let i = 0; i < columns.length; i++) {
