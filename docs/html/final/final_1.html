@@ -1,0 +1,109 @@
+<html>
+
+<head>
+	<title>ART102MM Final Proposal</title>
+	<link href="https://fonts.googleapis.com/css2?family=Geo&family=Abel&family=Rajdhani&display=swap" rel="stylesheet">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width" />
+	<link rel="stylesheet" type="text/css" href="../../css/global.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/index.css" />
+</head>
+
+<body>
+
+	<div class="bg-black mg-48">
+
+		<h1 class="text-center"><span class="highlight">ART102MM</span> Final Project Proposal</h1>
+		<h2>Motivation</h2>
+		<p class="content mass-text">
+			The transformation of information from one media to another, for instance, from text data to visual data in data visualization and from sound data to visual data in sound visualization. Other than the visualization of data where the transformation outputs visual data, there is also the sonification of data where the transformation outputs audio data. Although some details of the original data may be lost during transformations, data transformation provides different perspectives on representing a set of data and marks the fluidity of this representation. It is nevertheless intriguing to utilize data transformation as a tool to create in another medium then transform it back into its original medium to observe the result of this new representation.
+		</p>
+
+		<h2>Research</h2>
+		<h3>Relevant Projects</h3>
+		<ul class="content">
+			<li>
+				<a href="https://towardsdatascience.com/the-deep-music-visualizer-using-sound-to-explore-the-latent-space-of-biggan-198cd37dac9a"><h3 class="highlight">Deep Music Visualizer</h3></a>
+				<p class="mass-text">
+					The visualizer interpolates between images based on the tempo of the piece that it goes along with which is an interactive touch that I'd like to touch to tie the visual representation together with the sound data and vise versa consider its uses in the transformation from visual to audio representation.
+				</p>
+			</li>
+			<li>
+				<a href="https://www.wired.com/2014/08/mesmerizing-gifs-use-light-and-motion-to-visualize-sounds/"><h3 class="highlight">Erdal Inci's Light and Motion GIFs</h3></a>
+				<p class="mass-text">
+					Both Hierapolis-Amphitheatre and Light-Dome express sound with fascinating light patterns that highlight the movement which is a feature that I would like to incorporate into my own project
+				</p>
+				<img src="../../assets/final/Hierapolis_Amphitheatre.gif" class="w-30-perc" />
+				<img src="../../assets/final/light_dome.gif" class="w-30-perc" />
+			</li>
+			<li>
+				<a href="https://www.nasa.gov/mission_pages/chandra/news/data-sonification-sounds-from-around-the-milky-way.html"><h3 class="highlight">NASA's milky way photo sonification</h3></a>
+				<p class="mass-text">
+					Sonification of a photo of the milky way by NASA which might give insight into how I can approach my own sonification algorithm
+				</p>
+				<iframe type="text/html" src="https://www.youtube.com/embed/3N9RnmwIWbA"></iframe>
+			</li>
+		</ul>
+
+		<h2>Artist Statement</h2>
+		<h3>Minimal Viable Product</h3>
+		<p class="content mass-text">
+			<span class="highlight text-geo">Draw Mode</span><br>
+			Draw Mode is where audio data that the user input is visualized. In Draw Mode, the user can "draw" on the canvas using sound. They can input audio by either their device microphone or an uploaded sound file. The user can toggle between letting the canvas start or stop listening for input from the device microphone. They can also start and pause the sound file and choose when the canvas should listen from the sound file.<br>
+			There are two drawing tools that the user can select to draw with. The first one is a pencil tool that changes direction, velocity, and size based on the frequency and amplitude of the sound and will continue to draw as long as the user allows the canvas to listen for audio. The second tool is a brush tool that creates patterns to represent the sound inspired by Erdal Inci’s use of light and motion in Hierapolis-Amphitheatre, except this tool will draw the light trails onto canvas. Both tools will draw in real-time.<br><br>
+			<span class="highlight text-geo">Play Mode</span><br>
+			Play Mode is where the pixel data on canvas is sonified for the user to listen to their creation. In Play Mode, the user can alter a number of parameters controlling the range, key, and tempo of the sonification and hit a play button to begin the sonification. Once the sonification begins, the pixels on the canvas will be scanned to create notes of certain pitch and amplitude at a certain time based on the pixel's position and color. The sonification finishes when the whole canvas has been played.
+		</p>
+
+		<h3>Stretch Goals</h3>
+		<p class="content mass-text">
+			<span class="highlight text-geo">Real-Time Collaboration</span><br>
+			Collaboration on the same piece can be possible through web sockets where the person who creates the canvas initially will automatically become the server/host while anyone invited to collaborate on the piece is a client.<br><br>
+			<span class="highlight text-geo">Gallery</span><br>
+			Connecting a database to the app to allow users to save their piece after they are done. Saved pieces will be displayed on the gallery page for users who visit the page to view and replay the pieces.
+		</p>
+
+		<h2>Timeline</h2>
+		<h3><span class="highlight">Week 7:</span> Prototype I</h3>
+		<h4>Draw Mode - <span class="highlight">75%</span></h4>
+		<ul class="mass-text">
+			<li>Listen from microphone</li>
+			<li>Toggle start and stop</li>
+			<li>Pencil tool</li>
+			<li>Listen from uploaded audio file</li>
+		</ul>
+		<h3><span class="highlight">Week 8:</span> Prototype II</h3>
+		<h4>Draw Mode - <span class="highlight">100%</span></h4>
+		<ul class="mass-text">
+			<li>Paint tool</li>
+		</ul>
+		<h4>Play Mode - <span class="highlight">66%</span></h4>
+		<ul class="mass-text">
+			<li>Parameter sliders</li>
+			<li>Sonification algorithm</li>
+		</ul>
+		<h3><span class="highlight">Week 9:</span> 1-1 Meeting</h3>
+		<h4>Play Mode - <span class="highlight">100%</span></h4>
+		<ul class="mass-text">
+			<li>Refine sonification algorithm</li>
+		</ul>
+		<h4>Real-Time Collaboration - <span class="highlight">?%</span></h4>
+		<ul class="mass-text">
+			<li>Establish server-client connection</li>
+			<li>Send and receive data</li>
+		</ul>
+		<h4>Gallery - <span class="highlight">?%</span></h4>
+		<ul class="mass-text">
+			<li>Invite code system for collaboration</li>
+			<li>Gallery page</li>
+			<li>Store pieces into database</li>
+			<li>View and replay</li>
+		</ul>
+		<h3><span class="highlight">Week 10:</span> Presentation</h3>
+
+	</div>
+
+</body>
+
+
+
+<html>

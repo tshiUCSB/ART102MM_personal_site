@@ -50,9 +50,36 @@ body, html {
 	left: 0;
 }
 
+.text-center {
+	text-align: center;
+}
+
+.bg-black {
+	background-color: black;
+}
+
+.mg-48 {
+	margin: 48px;
+}
+
+.w-30-perc {
+	width: 30%;
+}
+
+.w-50-perc {
+	width: 50%;
+}
+.w-80-perc {
+	width: 80%;
+}
+
 .mass-text {
 	font-family: 'Rajdhani', sans-serif;
-	font-family: 'Abel', sans-serif;
+	/*font-family: 'Abel', sans-serif;*/
+}
+
+.text-geo {
+	font-family: 'Geo', sans-serif;
 }
 
 .full-screen {

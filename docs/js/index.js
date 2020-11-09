@@ -20,6 +20,11 @@ function init_index() {
 			count: 2,
 			descrip: "Daily inspirations and prevention from rustiness",
 			alt_names: ["10/13/20", "10/15/20"]
+		},
+		final {
+			count: 0,
+			descrip: "Final project to conclude the class",
+			alt_names: ["Final Proposal"]
 		}
 	};
 
