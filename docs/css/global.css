@@ -62,6 +62,10 @@ body, html {
 	margin: 48px;
 }
 
+.mg-y-128 {
+	margin: 128px 0;
+}
+
 .w-30-perc {
 	width: 30%;
 }
