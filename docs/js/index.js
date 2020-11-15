@@ -4,7 +4,7 @@
 function init_index() {
 	var projects = {
 		studio: {
-			count: 9,
+			count: 10,
 			descrip: "Work from in-class studio time"
 			// alt_links: {'8': "app/studio_9/public/studio_9.html"}
 		},
