@@ -49,6 +49,10 @@ body, html {
 	display: flex;
 }
 
+.visibility-hidden {
+	visibility: hidden;
+}
+
 .flex-row {
 	flex-direction: row;
 }

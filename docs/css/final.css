@@ -7,6 +7,11 @@
 	transform: translateY(-50%);
 }
 
+.toolbar-secondary {
+	right: 0;
+	bottom: auto;
+}
+
 .toolbar-slot {
 	background-color: black;
 	opacity: .8;
@@ -24,11 +29,43 @@
 	transform: scale(.95);
 }
 
+.toolbar-slider {
+	background-color: black;
+	opacity: .8;
+	width: 48px;
+	height: 144px;
+	cursor: pointer;
+	padding: 8px 0;
+}
+
+.slider {
+	appearance: slider-vertical;
+	width: 40px;
+	height: 136px;
+	margin: 4px;
+}
+
+.slider::-webkit-slider-thumb {
+  background: crimson;
+}
+
+.slider::-moz-range-thumb {
+  background: crimson;
+}
+
+.tool-icon {
+	margin: 8px;
+}
+
 @media (max-width: 480px) {
 	.toolbar {
 		flex-direction: row;
 		top: auto;
 		left: 50%;
 		transform: translateX(-50%);
+	}
+
+	.toolbar-secondary {
+		bottom: 0;
 	}
 }
