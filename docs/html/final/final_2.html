@@ -3,6 +3,7 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="../../css/global.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/final.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Geo&family=Abel&family=Rajdhani&display=swap" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.js" integrity="sha512-KxzVm+IqxNNq0+SzT/zzd5PHxY4LPrN+v5gZJ6+JKqjeU3Cr4y/djAg5eNlKDWurn1SeKZpql/yeOMWblMSzOg==" crossorigin="anonymous"></script>
@@ -10,7 +11,32 @@
 
 <body>
 	
-	<script src="../../js/final/final_2.js"></script>
+	<div id="toolbar-left" class="toolbar">
+		<div id="pencil-tool" class="toolbar-slot primary-tool">
+			<img class="tool-icon" src="../../assets/final/pencil_icon.png" />
+		</div>
+		<!-- <div id="brush-tool" class="toolbar-slot primary-tool">
+		</div> -->
+		<div id="play-tool" class="toolbar-slot primary-tool"></div>
+	</div>
+	<div id="pencil-tool-secondary" class="toolbar toolbar-secondary visibility-hidden">
+		<div class="toolbar-slot mic-tool">
+			<img class="tool-icon" src="../../assets/final/mic_icon.png" />
+		</div>
+		<div class="toolbar-slider">
+			<input type="range" min="1" max="10" step=".5" value="5" class="slider" id="x_speed_slider">
+		</div>
+		<div class="toolbar-slider">
+			<input type="range" min="1" max="1000" step="20" value="100" class="slider" id="max_pencil_size_slider">
+		</div>
+		<div class="toolbar-slider">
+			<input type="range" min="0" max="100" step="5" value="25" class="slider" id="max_pencil_pitch_slider">
+		</div>
+	</div>
+
+	<div id="p5-container" class="full-screen"></div>
+
+	<script src="../../js/final/prototype_1.js"></script>
 
 </body>
 

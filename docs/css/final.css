@@ -5,6 +5,7 @@
 	left: auto;
 	top: 50%;
 	transform: translateY(-50%);
+	margin: 10px;
 }
 
 .toolbar-secondary {
@@ -14,10 +15,12 @@
 
 .toolbar-slot {
 	background-color: black;
-	opacity: .8;
+	opacity: .6;
 	width: 48px;
 	height: 48px;
 	cursor: pointer;
+	border-radius: 100%;
+	margin: 5px 0;
 }
 
 .toolbar-slot:hover {
@@ -31,11 +34,13 @@
 
 .toolbar-slider {
 	background-color: black;
-	opacity: .8;
+	opacity: .6;
 	width: 48px;
 	height: 144px;
 	cursor: pointer;
-	padding: 8px 0;
+	padding: 20px 0;
+	border-radius: 25px;
+	margin: 5px 0;
 }
 
 .slider {
@@ -65,7 +70,21 @@
 		transform: translateX(-50%);
 	}
 
+	.toolbar-slot {
+		margin: 0 5px;
+	}
+
 	.toolbar-secondary {
 		bottom: 0;
+	}
+
+	.toolbar-slider {
+		margin: 0 5px;
+	}
+
+	.slider {
+		appearance: slider-vertical;
+		width: 96px;
+		height: 40px;
 	}
 }
