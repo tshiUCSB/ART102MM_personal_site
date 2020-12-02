@@ -45,6 +45,18 @@ body, html {
 	display: block;
 }
 
+.display-flex {
+	display: flex;
+}
+
+.flex-row {
+	flex-direction: row;
+}
+
+.flex-col {
+	flex-direction: column;
+}
+
 .bottom-left {
 	bottom: 0;
 	left: 0;
@@ -75,6 +87,11 @@ body, html {
 }
 .w-80-perc {
 	width: 80%;
+}
+
+.horiz-center {
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .mass-text {
