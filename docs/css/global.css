@@ -21,6 +21,14 @@ body, html {
 	color: var(--highlight-color);
 }
 
+.midtone {
+	color: var(--midtone-color);
+}
+
+.color-grey {
+	color: grey;
+}
+
 .float-right {
 	float: right;
 }
@@ -49,6 +57,10 @@ body, html {
 	display: flex;
 }
 
+.display-none {
+	display: none;
+}
+
 .visibility-hidden {
 	visibility: hidden;
 }
@@ -61,9 +73,21 @@ body, html {
 	flex-direction: column;
 }
 
+.flex-align-center {
+	align-items: center;
+}
+
+.flex-justify-center {
+	justify-content: center;
+}
+
 .bottom-left {
 	bottom: 0;
 	left: 0;
+}
+
+.bottom-0 {
+	bottom: 0;
 }
 
 .text-center {
@@ -72,6 +96,14 @@ body, html {
 
 .bg-black {
 	background-color: black;
+}
+
+.pad-5 {
+	padding: 5px;
+}
+
+.mg-20 {
+	margin: 20px;
 }
 
 .mg-48 {
@@ -93,9 +125,32 @@ body, html {
 	width: 80%;
 }
 
-.horiz-center {
+.vert-center {
 	top: 50%;
 	transform: translateY(-50%);
+}
+
+.horiz-center {
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.center-center {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.text-align-center {
+	text-align: center;
+}
+
+.ls-01-em {
+	letter-spacing: .1em;
+}
+
+.ls-05-em {
+	letter-spacing: .5em;
 }
 
 .mass-text {
@@ -105,6 +160,22 @@ body, html {
 
 .text-geo {
 	font-family: 'Geo', sans-serif;
+}
+
+.font-size-03-em {
+	font-size: .3em;
+}
+
+.font-size-1-em {
+	font-size: 1em;
+}
+
+.font-size-2-em {
+	font-size: 2em;
+}
+
+.font-size-4-em {
+	font-size: 4em;
 }
 
 .full-screen {

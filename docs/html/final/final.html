@@ -11,6 +11,38 @@
 
 <body>
 	
+	<div id="app-info" class="full-screen pos-fix">
+		<h1 class="highlight ls-05-em text-align-center font-size-4-em">SONVA
+			<span class="color-grey mass-text font-size-03-em ls-01-em">
+				A canvas painted with sounds
+			</span>
+		</h1>
+		<div id="tutorial" class="pos-abs center-center display-flex flex-align-center flex-justify-center flex-col">
+			<div class="tutorial-item">
+				Welcome to Sonva. This is an art tool that allows you to use sounds as a drawing tool to create art. <br><span class="highlight">Click</span> on this text to learn more about how to use Sonva. You can also click anywhere else at any time to <span class="highlight">skip</span> the walkthrough.
+			</div>
+			<div class="tutorial-item display-none">
+				The <span class="highlight">pencil tool</span> lets you draw lines with varying thickness and direction depending on the sound.
+			</div>
+			<div class="tutorial-item display-none">
+				The <span class="highlight">pencil tool</span> automatically moves horizontally and lets you draw lines with varying thickness and direction depending on the sound.
+			</div>
+			<div class="tutorial-item display-none">
+				It has 3 sliders for fine-tuned control. The first slider controls the speed that it automatically draws horizontally and whether it draws to the right or the left. A larger positive value moves faster to the right and a larger negative value moves faster to the left.
+			</div>
+			<div class="tutorial-item display-none">
+				The second slider controls the max thickness of the line and how sensitive thickness is to changes in the amplitude of the sound.
+			</div>
+			<div class="tutorial-item display-none">
+				The third slider controls how sensitive the vertical speed of the pencil is to changes in the frequency of the sound.
+			</div>
+			<div class="tutorial-item display-none">
+				You can select the microphone button to start listening from your mic. To stop it from listening, click again to deselect. While the mic is listening, you can click anywhere on the canvas to start drawing a line.
+			</div>
+		</div>
+		<div id="skip" class="highlight bottom-0 horiz-center pos-abs font-size-2-em mass-text mg-20 pad-5">SKIP</div>
+	</div>
+
 	<div id="toolbar-left" class="toolbar">
 		<div id="pencil-tool" class="toolbar-slot primary-tool">
 			<img class="tool-icon" src="../../assets/final/pencil_icon.png" />

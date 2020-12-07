@@ -1,3 +1,38 @@
+#app-info {
+	background-color: rgba(0, 0, 0, .85);
+	transition: all 1s;
+}
+
+#tutorial {
+	width: 50%;
+	height: 50%;
+}
+
+#skip {
+	transition: all 1s;
+}
+
+#skip:hover {
+	background-color: black;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+#skip:active {
+	font-size: 1em;
+}
+
+.tutorial-item {
+	width: 100%;
+	cursor: pointer;
+	font-family: 'rajdhani';
+	margin: 10px 0;
+}
+
+.tutorial-item:hover {
+	color: grey;
+}
+
 .toolbar {
 	position: fixed;
 	display: flex;

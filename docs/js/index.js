@@ -22,9 +22,9 @@ function init_index() {
 			alt_names: ["10/13/20", "10/15/20"]
 		},
 		final: {
-			count: 2,
+			count: 3,
 			descrip: "Final project to conclude the class",
-			alt_names: ["Final Proposal", "Prototype I"]
+			alt_names: ["Final Proposal", "Prototype I", "Prototype II"]
 		}
 	};
 
