@@ -90,6 +90,14 @@ body, html {
 	bottom: 0;
 }
 
+.top-0 {
+	top: 0;
+}
+
+.right-0 {
+	right: 0;
+}
+
 .text-center {
 	text-align: center;
 }
@@ -112,6 +120,10 @@ body, html {
 
 .mg-y-128 {
 	margin: 128px 0;
+}
+
+.mg-y-15 {
+	margin: 15px 0;
 }
 
 .w-30-perc {

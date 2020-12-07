@@ -22,6 +22,39 @@
 	font-size: 1em;
 }
 
+#upload-container {
+	width: 256px;
+	height: 128px;
+	background-color: black;
+	border-radius: 10px;
+	padding: 10px;
+	opacity: .8;
+}
+
+#file-input{
+	cursor: pointer;
+}
+
+#upload-container:hover {
+	opacity: 1;
+}
+
+#file-submit {
+	cursor: pointer;
+	transition: all 1s;
+}
+
+#file-submit:hover {
+	border-radius: 10px;
+	border-style: solid;
+	border-color: white;
+}
+
+#close-input:hover {
+	color: var(--highlight-color);
+	cursor: pointer;
+}
+
 .tutorial-item {
 	width: 100%;
 	cursor: pointer;

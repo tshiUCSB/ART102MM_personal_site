@@ -7,7 +7,9 @@ var states = undefined;
 var draw_position = undefined;
 var mic = null;
 var mic_fft = null;
+var last_pitch = undefined;
 var sliders = undefined;
+var music_file = undefined;
 
 function Tool(element, secondary=null) {
 	this.element = element;
@@ -16,6 +18,10 @@ function Tool(element, secondary=null) {
 }
 
 function tool_click_handler(e) {
+	if (this.id == "clear-tool") {
+		states.clear_canvas = true;
+		return;
+	}
 	for(const key in tool_dict) {
 		tool = tool_dict[key];
 		tool.selected = false;
@@ -48,6 +54,23 @@ function mic_click_handler(e) {
 	}
 }
 
+function upload_click_handler(e) {
+	if (states.mic_on) states.mic_on = false;
+	let up_container = document.getElementById("upload-container");
+	up_container.style.display = "block";
+}
+
+function file_sub_click_handler(e) {
+	music_file = document.getElementById("file-input").files[0];
+	let up_container = document.getElementById("upload-container");
+	up_container.style.display = "none";
+}
+
+function file_close_click_handler(e) {
+	let up_container = document.getElementById("upload-container");
+	up_container.style.display = "none";
+}
+
 function attach_tool_listeners() {
 	let tools = document.getElementsByClassName("primary-tool");
 	for(let i = 0; i < tools.length; i++) {
@@ -61,6 +84,20 @@ function attach_tool_listeners() {
 		let mic = mics[i];
 		mic.addEventListener('click', mic_click_handler);
 	}
+
+	let uploads = document.getElementsByClassName("upload-tool");
+	for(let i = 0; i < uploads.length; i++) {
+		let up = uploads[i];
+		up.addEventListener('click', upload_click_handler);
+	}
+
+	// let file_input = document.getElementById("file-input");
+	// file_input.addEventListener('change', file_handler);
+	let file_sub = document.getElementById("file-submit");
+	file_sub.addEventListener('click', file_sub_click_handler);
+
+	let close_input = document.getElementById("close-input");
+	close_input.addEventListener('click', file_close_click_handler);
 }
 
 function start_tool() {
@@ -108,6 +145,7 @@ function attach_listeners() {
 function setup() {
 	states = {
 		tool_started: false,
+		clear_canvas: false,
 		mic_on: false,
 		draw_started: false
 	};
@@ -142,11 +180,16 @@ function find_arr_max(arr) {
 }
 
 function draw() {
+	if (states.clear_canvas) {
+		background("#fff");
+		states.clear_canvas = false;
+	}
 	if (states.mic_on) {
 		if (states.draw_started) {
 			fill(0);
 			let spectrum = mic_fft.analyze();
 			let dy = find_arr_max(spectrum);
+			if (last_pitch === undefined) last_pitch = dy;
 			let pitch_min = parseInt(sliders.max_pencil_pitch.min);
 			let pitch_max = parseInt(sliders.max_pencil_pitch.value);
 			dy = constrain(dy, pitch_min, pitch_max);
