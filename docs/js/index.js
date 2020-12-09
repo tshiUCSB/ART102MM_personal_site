@@ -31,7 +31,7 @@ function init_index() {
 	var navigation_items = [["about", "About"], ["quote", "Quote"], 
 		["artist-rec", "Artist Highlight"], ["gesture", "Website Recommendation"],
 		["studio", "Studio"], ["project", "Project"], ["writing", "Writing"],
-		["sketch", "Sketch"], [null, "GitHub"]];
+		["sketch", "Sketch"], ["final", "Final"], [null, "GitHub"]];
 
 	var NAV_ICON = document.getElementById("nav-icon");
 	var NAV_ICON_BARS = document.getElementsByClassName("nav-icon-bar");

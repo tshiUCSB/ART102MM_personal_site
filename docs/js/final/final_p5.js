@@ -262,6 +262,11 @@ function draw() {
 			let pitch_max = parseInt(sliders.max_pencil_pitch.value);
 			dy = constrain(dy, pitch_min, pitch_max);
 			dy = map(dy, pitch_min, pitch_max, -10, 10);
+			// let diff = dy - last_pitch;
+			// last_pitch = dy;
+			// dy = diff * pitch_max;
+			// console.log(dy);
+
 
 			let dx = parseInt(sliders.x_speed.value);
 			let rate_min = parseInt(sliders.x_speed.min);
