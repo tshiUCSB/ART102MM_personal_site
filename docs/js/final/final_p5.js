@@ -39,6 +39,10 @@ function tool_click_handler(e) {
 		clicked_tool.secondary.style.visibility = 
 			clicked_tool.selected ? "visible" : "hidden";
 	}
+
+	if (this.id == "download-tool") {
+		states.download_canvas = true;
+	}
 }
 
 function mic_click_handler(e) {
@@ -195,7 +199,8 @@ function setup() {
 		mic_on: false,
 		music_uploaded: false,
 		music_on: false,
-		draw_started: false
+		draw_started: false,
+		download_canvas: false
 	};
 	tool_dict = {};
 	attach_listeners();
@@ -233,6 +238,10 @@ function draw() {
 	if (states.clear_canvas) {
 		background("#fff");
 		states.clear_canvas = false;
+	}
+	if (states.download_canvas) {
+		save("sonva.jpg");
+		states.download_canvas = false;
 	}
 	if (states.mic_on || states.music_on) {
 		let spectrum = undefined;

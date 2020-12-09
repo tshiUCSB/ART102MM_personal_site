@@ -12,15 +12,10 @@
 <body>
 	
 	<div id="app-info" class="full-screen pos-fix">
-		<!-- <h1 class="highlight ls-05-em text-align-center font-size-4-em text-major-mono">SONVA
-			<span class="color-grey text-abel font-size-03-em ls-01-em">
-				A canvas painted with sounds
-			</span>
-		</h1> -->
 		<div id="tutorial" class="pos-abs center-center display-flex text-abel flex-align-center flex-justify-center flex-col">
 			<h1 class="highlight ls-05-em text-align-center font-size-4-em text-major-mono">SONVA<br>
 			<span class="color-grey text-abel font-size-03-em ls-01-em">
-				A canvas painted with sounds
+				A canvas painted with sounds by Tina Shi
 			</span>
 		</h1>
 			<div class="tutorial-item">
@@ -44,6 +39,15 @@
 			<div class="tutorial-item display-none">
 				You can select the microphone button to start listening from your mic. To stop it from listening, click again to deselect. While the mic is listening, you can click anywhere on the canvas to start drawing a line.
 			</div>
+			<div class="tutorial-item display-none">
+				Another sound source you can use for drawing is a sound file uploaded from your own computer. Once you select the upload button, you can submit a file and then play it using the play button that comes with the draw tool.
+			</div>
+			<div class="tutorial-item display-none">
+				If you would like to save your art piece, the button with the downward arrow allows you to download the canvas.
+			</div>
+			<div class="tutorial-item display-none">
+				That's all. Hope you enjoy the experience and have fun!
+			</div>
 		</div>
 		<div id="skip" class="highlight bottom-0 horiz-center pos-abs font-size-2-em text-abel mg-20 pad-5">SKIP</div>
 	</div>
@@ -56,6 +60,9 @@
 		</div> -->
 		<div class="toolbar-slot upload-tool primary-tool">
 			<img id="upload-icon" class="tool-icon" src="../../assets/final/upload_icon.png" />
+		</div>
+		<div id="download-tool" class="toolbar-slot  primary-tool">
+			<img id="download-icon" class="tool-icon" src="../../assets/final/download_icon.png" />
 		</div>
 		<div id="clear-tool" class="toolbar-slot primary-tool">
 			<img class="tool-icon" src="../../assets/final/trash_icon.png" />
