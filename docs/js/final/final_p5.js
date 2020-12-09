@@ -249,7 +249,6 @@ function draw() {
 		if (states.mic_on) {
 			spectrum = mic_fft.analyze();
 			amp = mic.getLevel();
-			console.log("mic");
 		}
 		else if (states.music_on) {
 			spectrum = music_fft.analyze();
