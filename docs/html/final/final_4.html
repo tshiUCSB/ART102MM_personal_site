@@ -4,7 +4,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="../../css/global.css" />
 	<link rel="stylesheet" type="text/css" href="../../css/final.css" />
-	<link href="https://fonts.googleapis.com/css2?family=Geo&family=Abel&family=Rajdhani&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Geo&family=Abel&family=Rajdhani&family=Major+Mono+Display&display=swap" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.js" integrity="sha512-KxzVm+IqxNNq0+SzT/zzd5PHxY4LPrN+v5gZJ6+JKqjeU3Cr4y/djAg5eNlKDWurn1SeKZpql/yeOMWblMSzOg==" crossorigin="anonymous"></script>
 </head>
@@ -12,14 +12,19 @@
 <body>
 	
 	<div id="app-info" class="full-screen pos-fix">
-		<h1 class="highlight ls-05-em text-align-center font-size-4-em">SONVA
-			<span class="color-grey mass-text font-size-03-em ls-01-em">
+		<!-- <h1 class="highlight ls-05-em text-align-center font-size-4-em text-major-mono">SONVA
+			<span class="color-grey text-abel font-size-03-em ls-01-em">
+				A canvas painted with sounds
+			</span>
+		</h1> -->
+		<div id="tutorial" class="pos-abs center-center display-flex text-abel flex-align-center flex-justify-center flex-col">
+			<h1 class="highlight ls-05-em text-align-center font-size-4-em text-major-mono">SONVA<br>
+			<span class="color-grey text-abel font-size-03-em ls-01-em">
 				A canvas painted with sounds
 			</span>
 		</h1>
-		<div id="tutorial" class="pos-abs center-center display-flex flex-align-center flex-justify-center flex-col">
 			<div class="tutorial-item">
-				Welcome to Sonva. This is an art tool that allows you to use sounds as a drawing tool to create art. <br><span class="highlight">Click</span> on this text to learn more about how to use Sonva. You can also click <span class="highlight">skip</span> get straight to the app.
+				Welcome to Sonva. This is an art tool that allows you to use sounds as a drawing tool to create art. <br><span class="highlight">Click</span> on this text to learn more about how to use Sonva. You can also click <span class="highlight">skip</span> to get straight to the app.
 			</div>
 			<div class="tutorial-item display-none">
 				The <span class="highlight">pencil tool</span> lets you draw lines with varying thickness and direction depending on the sound.
@@ -40,7 +45,7 @@
 				You can select the microphone button to start listening from your mic. To stop it from listening, click again to deselect. While the mic is listening, you can click anywhere on the canvas to start drawing a line.
 			</div>
 		</div>
-		<div id="skip" class="highlight bottom-0 horiz-center pos-abs font-size-2-em mass-text mg-20 pad-5">SKIP</div>
+		<div id="skip" class="highlight bottom-0 horiz-center pos-abs font-size-2-em text-abel mg-20 pad-5">SKIP</div>
 	</div>
 
 	<div id="toolbar-left" class="toolbar">
@@ -49,6 +54,9 @@
 		</div>
 		<!-- <div id="brush-tool" class="toolbar-slot primary-tool">
 		</div> -->
+		<div class="toolbar-slot upload-tool primary-tool">
+			<img id="upload-icon" class="tool-icon" src="../../assets/final/upload_icon.png" />
+		</div>
 		<div id="clear-tool" class="toolbar-slot primary-tool">
 			<img class="tool-icon" src="../../assets/final/trash_icon.png" />
 		</div>
@@ -57,9 +65,9 @@
 		<div class="toolbar-slot mic-tool">
 			<img class="tool-icon" src="../../assets/final/mic_icon.png" />
 		</div>
-		<!-- <div class="toolbar-slot upload-tool">
-			<img class="tool-icon" src="../../assets/final/upload_icon.png" />
-		</div> -->
+		<div class="toolbar-slot play-tool">
+			<img class="tool-icon" src="../../assets/final/play_icon.png" />
+		</div>
 		<div class="toolbar-slider">
 			<input type="range" min="1" max="10" step=".5" value="5" class="slider" id="x_speed_slider">
 		</div>
@@ -72,8 +80,8 @@
 	</div>
 
 	<div id="upload-container" class="center-center pos-abs display-none">
-		<input type="file" id="file-input" class="pos-abs center-center text-align-center text-geo" />
-		<div id="file-submit" class="pos-abs horiz-center bottom-0 mg-y-15 disp">Upload</div>
+		<input type="file" accept="audio/*" id="file-input" class="pos-abs center-center text-align-center text-geo" />
+		<div id="file-submit" class="pos-abs horiz-center bottom-0 mg-y-15 pad-5">Upload</div>
 		<div id="close-input" class="pos-abs top-0 right-0 mg-20">X</div>
 	</div>
 

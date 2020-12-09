@@ -41,13 +41,17 @@
 
 #file-submit {
 	cursor: pointer;
-	transition: all 1s;
+	transition: all .3s;
 }
 
 #file-submit:hover {
 	border-radius: 10px;
 	border-style: solid;
 	border-color: white;
+}
+
+#file-submit:active {
+	font-size: .9em;
 }
 
 #close-input:hover {
@@ -74,6 +78,7 @@
 	top: 50%;
 	transform: translateY(-50%);
 	margin: 10px;
+	max-height: 100vh;
 }
 
 .toolbar-secondary {

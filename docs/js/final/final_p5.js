@@ -10,6 +10,8 @@ var mic_fft = null;
 var last_pitch = undefined;
 var sliders = undefined;
 var music_file = undefined;
+var music_fft = null;
+var music_amp = null;
 
 function Tool(element, secondary=null) {
 	this.element = element;
@@ -54,16 +56,54 @@ function mic_click_handler(e) {
 	}
 }
 
+function play_click_handler(e) {
+	states.music_on = !(states.music_on);
+	let icon = this.firstChild.nextSibling;
+	if (states.music_uploaded && states.music_on) {
+		userStartAudio().then(function() {
+			music_file.play();
+			music_fft.setInput(music_file);
+			music_amp.setInput(music_file);
+		});
+		this.style.opacity = "1";
+		icon.src = "../../assets/final/pause_icon.png";
+	}
+	else if (states.music_uploaded) {
+		music_file.pause();
+		this.style.opacity = ".6";
+		icon.src = "../../assets/final/play_icon.png";
+	}
+	else {
+		this.style.opacity = ".6";
+	}
+}
+
 function upload_click_handler(e) {
 	if (states.mic_on) states.mic_on = false;
 	let up_container = document.getElementById("upload-container");
 	up_container.style.display = "block";
 }
 
+function music_uploaded_callback(e) {
+	states.music_uploaded = true;
+	let up_icon = document.getElementById("upload-icon");
+	up_icon.setAttribute('src', "../../assets/final/upload_icon_crimson.png");
+}
+
 function file_sub_click_handler(e) {
-	music_file = document.getElementById("file-input").files[0];
-	let up_container = document.getElementById("upload-container");
-	up_container.style.display = "none";
+	let uploaded_file = document.getElementById("file-input").files[0];
+	if (uploaded_file) {
+		states.music_uploaded = false;
+		let up_container = document.getElementById("upload-container");
+		up_container.style.display = "none";
+		if (!music_file) {
+			music_file = new p5.SoundFile(uploaded_file, music_uploaded_callback);
+		}
+		else {
+			music_file.setPath(uploaded_file, music_uploaded_callback);
+		}
+		music_file.setLoop(true);
+	}
 }
 
 function file_close_click_handler(e) {
@@ -83,6 +123,12 @@ function attach_tool_listeners() {
 	for(let i = 0; i < mics.length; i++) {
 		let mic = mics[i];
 		mic.addEventListener('click', mic_click_handler);
+	}
+
+	let plays = document.getElementsByClassName("play-tool");
+	for(let i = 0; i < plays.length; i++) {
+		let play = plays[i];
+		play.addEventListener('click', play_click_handler);
 	}
 
 	let uploads = document.getElementsByClassName("upload-tool");
@@ -147,6 +193,8 @@ function setup() {
 		tool_started: false,
 		clear_canvas: false,
 		mic_on: false,
+		music_uploaded: false,
+		music_on: false,
 		draw_started: false
 	};
 	tool_dict = {};
@@ -162,6 +210,8 @@ function setup() {
 
 	mic = new p5.AudioIn();
 	mic_fft = new p5.FFT();
+	music_fft = new p5.FFT();
+	music_amp = new p5.Amplitude();
 
 	noLoop();
 }
@@ -184,10 +234,20 @@ function draw() {
 		background("#fff");
 		states.clear_canvas = false;
 	}
-	if (states.mic_on) {
+	if (states.mic_on || states.music_on) {
+		let spectrum = undefined;
+		let amp = undefined;
+		if (states.mic_on) {
+			spectrum = mic_fft.analyze();
+			amp = mic.getLevel();
+			console.log("mic");
+		}
+		else if (states.music_on) {
+			spectrum = music_fft.analyze();
+			amp = music_amp.getLevel();
+		}
 		if (states.draw_started) {
 			fill(0);
-			let spectrum = mic_fft.analyze();
 			let dy = find_arr_max(spectrum);
 			if (last_pitch === undefined) last_pitch = dy;
 			let pitch_min = parseInt(sliders.max_pencil_pitch.min);
@@ -201,7 +261,7 @@ function draw() {
 			let total = rate_max - rate_min;
 			dx = map(dx, rate_min, rate_max, -total / 2, total / 2);
 			
-			let draw_size = map(mic.getLevel(), 0, 1, 
+			let draw_size = map(amp, 0, 1, 
 				parseInt(sliders.max_pencil_size.min), 
 				parseInt(sliders.max_pencil_size.value));
 			circle(draw_position.x, draw_position.y, draw_size);
@@ -212,7 +272,7 @@ function draw() {
 }
 
 function mousePressed() {
-	if (states.mic_on) {
+	if (states.mic_on || states.music_on) {
 		states.draw_started = true;
 		draw_position = {x: mouseX, y: mouseY};
 	}
@@ -222,6 +282,10 @@ function mouseReleased() {
 	if (states.draw_started) {
 		states.draw_started = false;
 	}
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
 }
 
 
