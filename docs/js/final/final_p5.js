@@ -100,12 +100,10 @@ function file_sub_click_handler(e) {
 		states.music_uploaded = false;
 		let up_container = document.getElementById("upload-container");
 		up_container.style.display = "none";
-		if (!music_file) {
-			music_file = new p5.SoundFile(uploaded_file, music_uploaded_callback);
-		}
-		else {
-			music_file.setPath(uploaded_file, music_uploaded_callback);
-		}
+		let up_icon = document.getElementById("upload-icon");
+		up_icon.setAttribute('src', "../../assets/final/upload_icon.png");
+		
+		music_file = new p5.SoundFile(uploaded_file, music_uploaded_callback);
 		music_file.setLoop(true);
 	}
 }
