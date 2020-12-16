@@ -110,6 +110,10 @@ body, html {
 	padding: 5px;
 }
 
+.pad-20 {
+	padding: 20px;
+}
+
 .mg-20 {
 	margin: 20px;
 }

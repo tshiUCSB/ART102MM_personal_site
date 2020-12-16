@@ -3,12 +3,28 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="../../css/global.css" />
-	<link rel="stylesheet" type="text/css" href="../../css/project/project_4.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Geo&family=Abel&family=Rajdhani&display=swap" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.js" integrity="sha512-KxzVm+IqxNNq0+SzT/zzd5PHxY4LPrN+v5gZJ6+JKqjeU3Cr4y/djAg5eNlKDWurn1SeKZpql/yeOMWblMSzOg==" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="bg-black">
+
+	<div id="p5-container" class="full-screen"></div>
+
+	<p class="pad-20 mg-48 mass-text">
+		NEO aims to visualize <a href="https://data.nasa.gov/resource/2vr3-k9wn.json" class="highlight">NASA's data for Near-Earth Objects (NEO)</a> in an artistic manner. Each vertical line represents a NEO. The length of the vertical line corresponds to the <a href="https://cneos.jpl.nasa.gov/glossary/h.html" class="highlight">H (absolute magnitude)</a> of the NEO. The color of the line depends on the <a href="https://en.wikipedia.org/wiki/Minimum_orbit_intersection_distance#:~:text=Minimum%20orbit%20intersection%20distance%20(MOID,of%20a%20collision%20with%20Earth." class="highlight">minimum orbit intersection distance (moid)</a> to the Earth. A NEO with a moid of less than 0.05 AU is considered a <a href="https://cneos.jpl.nasa.gov/glossary/PHA.html" class="highlight">potentially hazardous astroid (PHA)</a> and takes on a more golden or red color, whereas NEOs that have a greater moid have a more violet or blue color. The orbs on the vertical lines move at a speed that corresponds to the orbital period of their respective NEOs.<br><br>
+		You can hover your mouse over an individual NEO and view its designationa and discovery date. You can also hold down the mouse button to play NEO. Depending on the <a href="https://www.permanent.com/apollo-amor-aten-near-earth-asteroids.html" class="highlight">type of NEO (apollo, amor, or aten)</a>, NEO will use a different oscillator when the scan hits the orb of that NEO. The frequency of the oscillator that plays is contingent on the in-degree of the NEO.<br><br>
+		Tested on MacBook Pro on macOS Catalina 10.15.7 using Google Chrome 87.0.4280.88 (x86_64)
+	</p>
+
+	<h2 class="text-center">Resources</h2>
+	<p class="pad-20 mg-48">
+		<a href="https://data.nasa.gov/resource/2vr3-k9wn.json" class="highlight">NASA Near-Earth Objects (NEO) data</a><br>
+		<a href="https://cneos.jpl.nasa.gov/glossary/" class="highlight">NASA CNEOS Glossary</a><br>
+		<a href="https://en.wikipedia.org/wiki/Minimum_orbit_intersection_distance#:~:text=Minimum%20orbit%20intersection%20distance%20(MOID,of%20a%20collision%20with%20Earth." class="highlight">Wikipedia: Minimum Orbit Ontersection distance</a><br>
+		<a href="https://www.permanent.com/apollo-amor-aten-near-earth-asteroids.html" class="highlight">NEO Classifications Based on Locations</a><br>
+		<a href="https://p5js.org/reference/#/p5.Oscillator" class="highlight">p5.js Oscillator Reference</a>
 
 	<script src="../../js/project/project_4.js"></script>
 

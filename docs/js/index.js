@@ -9,7 +9,7 @@ function init_index() {
 			// alt_links: {'8': "app/studio_9/public/studio_9.html"}
 		},
 		project: {
-			count: 3,
+			count: 4,
 			descrip: "Practicing and applying concepts in creative ways"
 		},
 		writing: {

@@ -1,3 +1,9 @@
+/*
+Final Project for ART102MM
+12/09/20
+Code by Tina Shi
+URL: https://tshiucsb.github.io/ART102MM_personal_site/html/final/final_4.html
+*/
 
 var TUTORIAL_ITEMS = undefined;
 
