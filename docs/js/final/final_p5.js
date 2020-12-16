@@ -89,11 +89,14 @@ function play_click_handler(e) {
 	states.music_on = !(states.music_on);
 	let icon = this.firstChild.nextSibling;
 	if (states.music_uploaded && states.music_on) {
-		userStartAudio().then(function() {
-			music_file.play();
-			music_fft.setInput(music_file);
-			music_amp.setInput(music_file);
-		});
+		// userStartAudio().then(function() {
+		// 	music_file.play();
+		// 	music_fft.setInput(music_file);
+		// 	music_amp.setInput(music_file);
+		// });
+		music_file.play();
+		music_fft.setInput(music_file);
+		music_amp.setInput(music_file);
 		this.style.opacity = "1";
 		icon.src = "../../assets/final/pause_icon.png";
 	}
@@ -339,6 +342,7 @@ function draw() {
 }
 
 function mousePressed() {
+	userStartAudio();
 	// start drawing if there is a sound source playing and the mouse is pressed
 	if (states.mic_on || states.music_on) {
 		states.draw_started = true;
