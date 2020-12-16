@@ -10,7 +10,9 @@ function init_index() {
 		},
 		project: {
 			count: 4,
-			descrip: "Practicing and applying concepts in creative ways"
+			descrip: "Practicing and applying concepts in creative ways",
+			alt_names: ["Medium Rare", "Emoticat", "Fleeting", "NEO"]
+		
 		},
 		writing: {
 			count: 2,
